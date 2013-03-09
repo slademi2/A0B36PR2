@@ -4,6 +4,7 @@
  */
 package semestralka;
 
+import java.awt.Button;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class Okno extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gb1.setConstraints(but, gbc);// vlozeni komponenty !!
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        add (b);
     }
     void set (){
         

@@ -15,8 +15,11 @@ public class Semestralka {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("novypokus o komit");
-        Okno ok1 = new Okno();
-        ok1.set();
+       
+       /* Okno ok1 = new Okno();
+        ok1.set();*/
+        
+        MujGridBagLayout ff = new MujGridBagLayout();
+        ff.setVisible(true);
     }
 }
