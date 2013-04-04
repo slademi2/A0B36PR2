@@ -1,34 +1,48 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package semestralka;
 
-import java.awt.Button;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.*;
+import java.awt.HeadlessException;
 import javax.swing.*;
 
-/**
- *
- * @author Michal
- */
-public class Okno extends JFrame {
-    JButton but = new JButton("Novy");
-    JButton b = new JButton("Ahoj");
-    public Okno(){
-        GridBagLayout gb1 = new GridBagLayout();// mrizkovany layout
-        this.setLayout(gb1);
-        GridBagConstraints gbc = new GridBagConstraints();
-        gb1.setConstraints(but, gbc);// vlozeni komponenty !!
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        add (b);
-    }
-    void set (){
-        
-        this.pack();
-        this.setVisible(true);
-    }
+
+
+public class Okno extends JFrame{
+    private Tlacitko novy=new Tlacitko("Novy");
     
+    
+    
+    
+   public Okno()throws HeadlessException{
+        super("Moje Okno");
+        int vyska= 320;
+        int sirka = 200;
+        
+        this.setSize(vyska,sirka);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        this.setLayout(null);
+        JLabel l1 = new JLabel();
+        l1.setBounds(20,10,320,32);
+        l1.setText("Vítejte v Databázi knih, zadejte požadavek");
+
+        Tlacitko novy = new Tlacitko("Nový");
+        novy.setBounds(50,50,130,32);
+
+        Tlacitko smazat = new Tlacitko("Smazat");
+        smazat.setBounds(50,90,130,32);
+        smazat.setText("B");
+        
+        Menulista m = new  Menulista();
+        setJMenuBar(m);
+        
+        
+        this.add(novy);
+        this.add(l1);
+        this.add(smazat);
+        
+        this.setVisible(true);
+        
+    }
+   
+
 }
