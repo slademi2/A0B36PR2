@@ -36,9 +36,12 @@ public class Menulista extends JMenuBar {
         this.add(knihaMenu);
         
         JMenuItem novy = new JMenuItem("Nová");
+        novy.addActionListener(new Okno.Novy());
         JMenuItem smazat = new JMenuItem("Smazat");
+        smazat.addActionListener(new Okno.Odebrat());
         JMenuItem vyhledat = new JMenuItem("Vyhledat");
         knihaMenu.add(novy);
+        
         knihaMenu.add(smazat);
         knihaMenu.add(vyhledat);
     }

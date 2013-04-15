@@ -27,7 +27,7 @@ public class Knihovna implements Serializable {
     }
 
     public String tisk() {
-        String s = "vhy";
+        String s = " ";
         for (int i = 0; i < knihovna.size(); i++) {
 
             s = knihovna.get(i).toString();
@@ -101,5 +101,14 @@ public class Knihovna implements Serializable {
 
     public Kniha getI(int i) {
         return knihovna.get(i);
+    }
+    public void Odeber(int i){
+        if(i<knihovna.size()){
+        knihovna.remove(i);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, " Nebya vybrána žádná kniha pro smazání !!", "", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
 }
