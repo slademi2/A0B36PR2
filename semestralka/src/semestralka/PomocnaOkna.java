@@ -1,5 +1,6 @@
 package semestralka;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.List;
 
@@ -36,9 +37,10 @@ public class PomocnaOkna extends JFrame {
     Tlacitko zrusit = new Tlacitko("Zrušit");
     NumberFormat f = NumberFormat.getInstance();
     JFormattedTextField numberField = new JFormattedTextField(f);
+    private int n;
 
     public PomocnaOkna() {
-        
+
         this.setVisible(true);
         this.setBounds(320, 200, 300, 500);
 
@@ -89,7 +91,7 @@ public class PomocnaOkna extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            
+
             Kniha k = new Kniha();
 
             k.prectiJmeno(t1.getText());
@@ -104,11 +106,11 @@ public class PomocnaOkna extends JFrame {
             // k.prectiRok(Integer.parseInt(numberField.getText()));
 
             Okno.knihovna.pridej(k);
-            Okno.pomocna= Okno.knihovna;
+            Okno.pomocna = Okno.knihovna;
             Okno.list.removeAll();
-            
-            for(int i = 0;i < Okno.knihovna.velikost();i++){
-            Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+
+            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
+                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
             }
 
             dispose();
@@ -128,17 +130,53 @@ public class PomocnaOkna extends JFrame {
     }
 
     void zobrazit() {
-        
+
         for (int i = 0; i < Okno.knihovna.velikost(); i++) {
             Okno.zobrlist.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
         }
-        
-        
+
+
         add(Okno.zobrlist);
         Okno.zobrlist.addActionListener(new ListAction());
         Okno.zobrlist.addItemListener(new ItemAction());
         this.setBounds(320, 200, 300, 200);
     }
+
+    void hledat() {
+        int vyska = 450;
+        int sirka = 280;
+        this.setSize(vyska, sirka);
+        this.setTitle("Vyhledávání knih: ");
+
+        JTextField text = new JTextField();
+        text.setBounds(115, 185, 205, 30);
+        text.setEditable(true);
+
+        Tlacitko zpet = new Tlacitko("Zpět");
+        zpet.setBounds(325, 185, 100, 30);
+        zpet.addActionListener(new Zpet());
+
+        Tlacitko smazat = new Tlacitko("Smazat");
+        smazat.setBounds(10, 185, 100, 30);
+        smazat.addActionListener(new Smazat());
+
+        JSeparator sep = new JSeparator();
+        sep.setBounds(0, 181, 450, 10);
+
+
+       /* for (int i = 0; i < Okno.knihovna.velikost(); i++) {
+
+            Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+*/
+        
+            this.add(text);
+            this.add(smazat);
+            this.add(zpet);
+            this.add(sep);
+            this.add(Okno.list);
+
+    }
+    
 
     private class ListAction implements ActionListener {
 
@@ -147,8 +185,8 @@ public class PomocnaOkna extends JFrame {
             Kniha kn = new Kniha();
             JFrame f = new JFrame("Kniha");
             //System.out.println(e.getActionCommand().charAt(0));
-            
-            
+
+
             int i = (int) (e.getActionCommand().charAt(0));
             System.out.println(e.getSource());
 
@@ -173,8 +211,8 @@ public class PomocnaOkna extends JFrame {
 
             f.setBounds(320, 200, 300, 200);
             f.setAlwaysOnTop(true);
-            
-           
+
+
         }
     }
 
@@ -187,6 +225,32 @@ public class PomocnaOkna extends JFrame {
             f.setBounds(200, 200, 100, 100);
             JLabel jmeno = new JLabel("e.toString()");
             add(jmeno);
+        }
+    }
+
+    public class Zpet implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            PomocnaOkna.this.dispose();
+        }
+    }
+
+    public class Smazat implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+
+            Okno.knihovna.Odeber(n);
+
+            System.out.println(Okno.knihovna.velikost());
+            Okno.pomocna = Okno.knihovna;
+            Okno.list.removeAll();
+
+            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
+                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+            }
         }
     }
 }

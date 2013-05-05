@@ -49,6 +49,7 @@ public class Okno extends JFrame {
 
         Tlacitko hledat = new Tlacitko("Vyhledat knihu ");
         hledat.setBounds(50,85 , 130, 30);
+        hledat.addActionListener(new Okno.Hledat());
         
         Tlacitko odebrat = new Tlacitko("Zobrazit knihovnu");
         odebrat.setBounds(50, 120, 130, 30);
@@ -57,7 +58,7 @@ public class Okno extends JFrame {
         hlavnipanel.add(l1);
         hlavnipanel.add(odebrat);
         hlavnipanel.add(novy);
-        //hlavnipanel.add(hledat);
+        hlavnipanel.add(hledat);
         
         panelodebrat.setVisible(false);
         panelodebrat.odebrat();
@@ -102,6 +103,15 @@ public class Okno extends JFrame {
             hlavnipanel.setVisible(false);  
             panelodebrat.setVisible(true);
             
+        }
+    }
+
+    static class Hledat implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           PomocnaOkna ok = new PomocnaOkna();
+           ok.hledat();
         }
     }
     
