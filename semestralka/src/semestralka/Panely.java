@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Collections;
 import javax.swing.*;
 
 public class Panely extends JPanel {
@@ -20,18 +21,26 @@ public class Panely extends JPanel {
         this.setLayout(null);
     }
     void odebrat(){
-            
-            //List list = new List(Okno.knihovna.velikost());
-            
+    
             for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                
+
                 Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+
             }
+        
+            MujChoice choc = new MujChoice();
+            choc.setBounds(208, 185, 110, 30);
+
             
+           
             Okno.list.addActionListener(new ListAction());
             Okno.list.addItemListener(new ItemAction());
             Okno.list.setVisible(true);
             Okno.list.setBounds(2,2,430,180);
+
+            JLabel lab = new JLabel("Seřadit podle: ");
+            lab.setBounds(115, 185, 90, 20);
+            
             
             
             Tlacitko zpet = new Tlacitko("Zpět");
@@ -44,7 +53,9 @@ public class Panely extends JPanel {
             
             JSeparator sep = new JSeparator();
             sep.setBounds(0, 181, 450, 10);
-            
+
+            this.add(lab);
+             this.add(choc);
             this.add(smazat);
             this.add(zpet);
             this.add(sep);
@@ -97,7 +108,7 @@ public class Panely extends JPanel {
            
         }
     }
-    
+   
     public class Zpet implements ActionListener {
 
         @Override
@@ -113,12 +124,12 @@ public class Panely extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(n);
+
             
             Okno.knihovna.Odeber(n);
             
             System.out.println(Okno.knihovna.velikost());
-            
+            Okno.pomocna= Okno.knihovna;
             Okno.list.removeAll();
             
             for(int i = 0;i < Okno.knihovna.velikost();i++){

@@ -9,8 +9,8 @@ public class Kniha implements Serializable {
    private String nazev;
    private String umisteni;
    private String poznamka;
-   String zanr;
-    String rok;
+   private String zanr;
+   private String rok;
     
     public Kniha(){
     

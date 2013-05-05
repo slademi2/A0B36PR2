@@ -9,11 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Collections;
 import javax.swing.*;
 
 public class Okno extends JFrame {
 
     static Knihovna knihovna = new Knihovna();
+    static Knihovna pomocna = new Knihovna();
     
     public static Panely hlavnipanel = new Panely();
     public static Panely panelodebrat = new Panely();
@@ -31,8 +33,7 @@ public class Okno extends JFrame {
 
         super("Moje Okno");
         knihovna.load();
-
-        
+        pomocna.load();
         
         this.setSize(vyska, sirka);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,30 +44,30 @@ public class Okno extends JFrame {
 
         Tlacitko novy = new Tlacitko("Přidat Knihu");
 
-        novy.setBounds(50, 50, 130, 32);
+        novy.setBounds(50, 50, 130, 30);
         novy.addActionListener(new Okno.Novy());
 
-       /* Tlacitko vypsat = new Tlacitko("Zobrazit knihy");
-        vypsat.setBounds(50, 90, 130, 32);
-        vypsat.addActionListener(new Okno.Zobrazit());*/
-
+        Tlacitko hledat = new Tlacitko("Vyhledat knihu ");
+        hledat.setBounds(50,85 , 130, 30);
+        
         Tlacitko odebrat = new Tlacitko("Zobrazit knihovnu");
-        odebrat.setBounds(50, 130, 130, 32);
+        odebrat.setBounds(50, 120, 130, 30);
         odebrat.addActionListener(new Odebrat());
 
         hlavnipanel.add(l1);
         hlavnipanel.add(odebrat);
         hlavnipanel.add(novy);
-        //hlavnipanel.add(vypsat);
-        
+        //hlavnipanel.add(hledat);
         
         panelodebrat.setVisible(false);
         panelodebrat.odebrat();
         Menulista m = new Menulista();
         setJMenuBar(m);
+        
         add(panelodebrat);
         add(hlavnipanel);
         this.setVisible(true);
+        
 
     }
     void Oknoodeber(Component comp){

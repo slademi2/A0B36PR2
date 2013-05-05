@@ -104,7 +104,7 @@ public class PomocnaOkna extends JFrame {
             // k.prectiRok(Integer.parseInt(numberField.getText()));
 
             Okno.knihovna.pridej(k);
-            
+            Okno.pomocna= Okno.knihovna;
             Okno.list.removeAll();
             
             for(int i = 0;i < Okno.knihovna.velikost();i++){
@@ -128,13 +128,12 @@ public class PomocnaOkna extends JFrame {
     }
 
     void zobrazit() {
-
-       // List list = new List(Okno.knihovna.velikost());
         
         for (int i = 0; i < Okno.knihovna.velikost(); i++) {
             Okno.zobrlist.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
         }
-
+        
+        
         add(Okno.zobrlist);
         Okno.zobrlist.addActionListener(new ListAction());
         Okno.zobrlist.addItemListener(new ItemAction());
