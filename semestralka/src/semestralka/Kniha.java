@@ -2,6 +2,7 @@ package semestralka;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class Kniha implements Serializable {
    private String jmeno;
@@ -28,6 +29,9 @@ public class Kniha implements Serializable {
     @Override
     public String toString(){
         return "Autor: " + jmeno + " "+ prijmeni  + " nazev: "+ nazev + " rok: "+ rok + " žánr: "+ zanr + " umístění: " + umisteni + " poznámka: "+ poznamka;
+    }
+    public String toStringall(){
+        return jmeno+" "+prijmeni+" " + nazev +" "+ rok +" "+ zanr +" "+ umisteni;
     }
 
     public String getJmeno() {
@@ -134,5 +138,52 @@ public class Kniha implements Serializable {
         this.setRok(c);*/
         this.setRok(n);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.jmeno);
+        hash = 97 * hash + Objects.hashCode(this.prijmeni);
+        hash = 97 * hash + Objects.hashCode(this.nazev);
+        hash = 97 * hash + Objects.hashCode(this.umisteni);
+        hash = 97 * hash + Objects.hashCode(this.poznamka);
+        hash = 97 * hash + Objects.hashCode(this.zanr);
+        hash = 97 * hash + Objects.hashCode(this.rok);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Kniha other = (Kniha) obj;
+        if (!Objects.equals(this.jmeno, other.jmeno)) {
+            return false;
+        }
+        if (!Objects.equals(this.prijmeni, other.prijmeni)) {
+            return false;
+        }
+        if (!Objects.equals(this.nazev, other.nazev)) {
+            return false;
+        }
+        if (!Objects.equals(this.umisteni, other.umisteni)) {
+            return false;
+        }
+        if (!Objects.equals(this.poznamka, other.poznamka)) {
+            return false;
+        }
+        if (!Objects.equals(this.zanr, other.zanr)) {
+            return false;
+        }
+        if (!Objects.equals(this.rok, other.rok)) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }

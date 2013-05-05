@@ -105,7 +105,6 @@ public class Panely extends JPanel {
         public void itemStateChanged(ItemEvent e) {
             String s =( e.getItem().toString());
            n = Integer.parseInt(s);
-           
         }
     }
    

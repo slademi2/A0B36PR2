@@ -192,6 +192,18 @@ public class Knihovna implements Serializable {
         }
         return kn;
     }
+    public Knihovna HledejVse(String s){
+        s = s.toLowerCase();
+        Knihovna kn = new Knihovna();
+        String jmeno;
+        for(int i = 0; i <Okno.knihovna.velikost();i++){
+           jmeno = Okno.knihovna.getI(i).toStringall().toLowerCase();
+           if(jmeno.contains(s)){
+               kn.pridej(Okno.knihovna.getI(i));
+           }
+        }
+        return kn;
+    }
     
     
 }

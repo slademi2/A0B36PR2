@@ -1,6 +1,5 @@
 package semestralka;
 
-import java.util.Calendar;
 
 public class Semestralka {
 

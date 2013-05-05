@@ -35,6 +35,9 @@ public class Okno extends JFrame {
         knihovna.load();
         pomocna.load();
         
+        
+        this.setResizable(false);
+        this.setBounds(500,300, vyska, sirka);
         this.setSize(vyska, sirka);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -44,21 +47,31 @@ public class Okno extends JFrame {
 
         Tlacitko novy = new Tlacitko("Přidat Knihu");
 
-        novy.setBounds(50, 50, 130, 30);
+        novy.setBounds(50, 50, 150, 30);
         novy.addActionListener(new Okno.Novy());
 
         Tlacitko hledat = new Tlacitko("Vyhledat knihu ");
-        hledat.setBounds(50,85 , 130, 30);
+        hledat.setBounds(50,85 , 150, 30);
         hledat.addActionListener(new Okno.Hledat());
         
         Tlacitko odebrat = new Tlacitko("Zobrazit knihovnu");
-        odebrat.setBounds(50, 120, 130, 30);
+        odebrat.setBounds(50, 120, 150, 30);
         odebrat.addActionListener(new Odebrat());
+        
+        Tlacitko uloz = new Tlacitko("Uložit knihovnu");
+        uloz.setBounds(50, 155, 150, 30);
+        uloz.addActionListener(new Ulozit());
+        
+        Tlacitko konec = new Tlacitko("Ukončit program");
+        konec.setBounds(50,190,150,30);
+        konec.addActionListener(new Konec());
 
         hlavnipanel.add(l1);
         hlavnipanel.add(odebrat);
         hlavnipanel.add(novy);
         hlavnipanel.add(hledat);
+        hlavnipanel.add(uloz);
+        hlavnipanel.add(konec);
         
         panelodebrat.setVisible(false);
         panelodebrat.odebrat();
@@ -114,6 +127,24 @@ public class Okno extends JFrame {
            ok.hledat();
         }
     }
+
+    private static class Konec implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFrame frame = new JFrame("EXIT");
+            int n = JOptionPane.showConfirmDialog(frame,"Opravdu chcete ukončit program?",
+                    "Exit",JOptionPane.YES_NO_OPTION);
+            if( n == 1){
+                frame.dispose();
+            }
+            else{
+                Okno.knihovna.save();
+                System.exit(0);
+                
+            }
+        }
+    }
     
     public class Zpet implements ActionListener {
 
@@ -122,6 +153,13 @@ public class Okno extends JFrame {
             hlavnipanel.setVisible(true);
             panelodebrat.setVisible(false);
             
+        }
+    
+    }
+    private class Ulozit implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Okno.knihovna.save();
         }
     
     }
