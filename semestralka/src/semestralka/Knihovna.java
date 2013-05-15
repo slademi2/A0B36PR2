@@ -93,6 +93,7 @@ public class Knihovna implements Serializable {
 
                 FileInputStream fis = new FileInputStream(file);
                 ObjectInputStream oip = new ObjectInputStream(fis);
+                
                 knihovna = (ArrayList<Kniha>) oip.readObject();
                 oip.close();
             } catch (ClassNotFoundException ex) {
