@@ -16,30 +16,30 @@ public class Okno extends JFrame {
 
     static Knihovna knihovna = new Knihovna();
     static Knihovna pomocna = new Knihovna();
-    
     public static Panely hlavnipanel = new Panely();
     public static Panely panelodebrat = new Panely();
-    
+    public static Panely panelhledat = new Panely();
     static List list = new List(knihovna.velikost());
     static List zobrlist = new List(knihovna.velikost());
     
-    
-    public int vyska = 450;
-    public int sirka = 280;
-
-   
+    static int pocet = 0;// jen pro skousku otevirani oken
+    /*public int vyska = 450;
+    public int sirka = 280;*/
 
     public Okno() throws HeadlessException {
 
         super("Moje Okno");
         knihovna.load();
         pomocna.load();
+
         
         
-        this.setResizable(false);
-        this.setBounds(500,300, vyska, sirka);
-        this.setSize(vyska, sirka);
+        //this.setBounds(500, 300, vyska, sirka); stare rozmery bezt panelu vyhledat
+        int vyska = 455;
+        int sirka = 360;
+        this.setBounds(400, 200, vyska, sirka);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
 
         JLabel l1 = new JLabel();
         l1.setBounds(20, 10, 320, 32);
@@ -51,19 +51,19 @@ public class Okno extends JFrame {
         novy.addActionListener(new Okno.Novy());
 
         Tlacitko hledat = new Tlacitko("Vyhledat knihu ");
-        hledat.setBounds(50,85 , 150, 30);
+        hledat.setBounds(50, 85, 150, 30);
         hledat.addActionListener(new Okno.Hledat());
-        
+
         Tlacitko odebrat = new Tlacitko("Zobrazit knihovnu");
         odebrat.setBounds(50, 120, 150, 30);
         odebrat.addActionListener(new Odebrat());
-        
+
         Tlacitko uloz = new Tlacitko("Uložit knihovnu");
         uloz.setBounds(50, 155, 150, 30);
         uloz.addActionListener(new Ulozit());
-        
+
         Tlacitko konec = new Tlacitko("Ukončit program");
-        konec.setBounds(50,190,150,30);
+        konec.setBounds(50, 190, 150, 30);
         konec.addActionListener(new Konec());
 
         hlavnipanel.add(l1);
@@ -72,25 +72,34 @@ public class Okno extends JFrame {
         hlavnipanel.add(hledat);
         hlavnipanel.add(uloz);
         hlavnipanel.add(konec);
-        
+
+
         panelodebrat.setVisible(false);
         panelodebrat.odebrat();
+        
+       
+        panelhledat.setVisible(false);
+        
+        //panelhledat.hledat();
+
         Menulista m = new Menulista();
         setJMenuBar(m);
-        
+        add(panelhledat);
         add(panelodebrat);
         add(hlavnipanel);
         this.setVisible(true);
-        
+
 
     }
-    void Oknoodeber(Component comp){
+
+    void Oknoodeber(Component comp) {
         this.remove(comp);
     }
-    void OknoPridej(Component comp){
+
+    void OknoPridej(Component comp) {
         this.add(comp);
     }
-     
+
     static class Novy implements ActionListener {
 
         @Override
@@ -109,22 +118,37 @@ public class Okno extends JFrame {
         }
     }
 
-    static class Odebrat implements ActionListener {
+    static class Odebrat implements ActionListener {//zobrazeni knihovny
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            hlavnipanel.setVisible(false);  
+            hlavnipanel.setVisible(false);
             panelodebrat.setVisible(true);
-            
+            panelhledat.setVisible(false);
+
         }
     }
 
+    /* static class Hledat implements ActionListener {
+
+     @Override
+     public void actionPerformed(ActionEvent e) {
+     PomocnaOkna ok = new PomocnaOkna();
+     ok.hledat();
+     }
+     }
+     */
     static class Hledat implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           PomocnaOkna ok = new PomocnaOkna();
-           ok.hledat();
+            hlavnipanel.setVisible(false);
+            panelodebrat.setVisible(false);
+            panelhledat.setVisible(true);
+            panelhledat.hledat();
+            pocet ++;
+            System.out.println("pocet stisknuti vyhledavani je: " + pocet);
+            
         }
     }
 
@@ -133,36 +157,41 @@ public class Okno extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             JFrame frame = new JFrame("EXIT");
-            int n = JOptionPane.showConfirmDialog(frame,"Opravdu chcete ukončit program?",
-                    "Exit",JOptionPane.YES_NO_OPTION);
-            if( n == 1){
+            int n = JOptionPane.showConfirmDialog(frame, "Opravdu chcete ukončit program?",
+                    "Exit", JOptionPane.YES_NO_OPTION);
+            if (n == 1) {
                 frame.dispose();
-            }
-            else{
+            } else {
                 Okno.knihovna.save();
                 System.exit(0);
-                
+
             }
         }
     }
-    
+
     public class Zpet implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             hlavnipanel.setVisible(true);
             panelodebrat.setVisible(false);
-            
+            panelhledat.setVisible(false);
+
         }
-    
     }
-    private class Ulozit implements ActionListener{
+
+    public class Zpet_Hledat implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        }
+    }
+
+    private class Ulozit implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             Okno.knihovna.save();
         }
-    
     }
-     
 }
-
