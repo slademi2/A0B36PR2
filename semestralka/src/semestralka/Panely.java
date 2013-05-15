@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class Panely extends JPanel {
 
@@ -26,6 +28,7 @@ public class Panely extends JPanel {
     boolean oznaceno = false;
     boolean oznaceno_List = false;
     int predchozi;
+    static JFrame f = new JFrame("Kniha");
 
     //public int n;
     public String getPred() {
@@ -50,7 +53,7 @@ public class Panely extends JPanel {
         this.setLayout(null);
     }
 
-    void odebrat() { // panel zobrazit
+    void odebrat() { // panel zobrazit, spatne pojmenovani
 
         int vyska = 455;
         int sirka = 340;
@@ -61,7 +64,7 @@ public class Panely extends JPanel {
             Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
 
         }
-        
+
         MujChoice choc = new MujChoice(); // trideni podle ceho zobrazit
         choc.setBounds(208, 245, 110, 30);
 
@@ -203,21 +206,22 @@ public class Panely extends JPanel {
     }
 
     private static class Upravit_Hledat implements ActionListener {
-
-        public Upravit_Hledat() {
+        public Upravit_Hledat(){
         }
-
         @Override
         public void actionPerformed(ActionEvent e) {
+            Panely.f.dispose();
             System.out.println("UPRAVIT");
             PomocnaOkna p = new PomocnaOkna(n, "Hledat");
             p.upravit();
             p.setVisible(true);
-
-        }
+        } 
     }
 
     private static class Upravit_Zobrazit implements ActionListener {
+
+        public Upravit_Zobrazit() {
+        }
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -225,6 +229,8 @@ public class Panely extends JPanel {
             PomocnaOkna p = new PomocnaOkna(n, "Zobrazit");
             p.upravit();
             p.setVisible(true);
+            f.dispose();
+
         }
     }
 
@@ -233,7 +239,7 @@ public class Panely extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             Kniha kn = new Kniha();
-            JFrame f = new JFrame("Kniha");
+            
             //System.out.println(e.getActionCommand().charAt(0));
 
             int i = (int) (e.getActionCommand().charAt(0));
@@ -241,7 +247,7 @@ public class Panely extends JPanel {
 
             kn = Okno.knihovna.getI(i - 49);
 
-            GridLayout gl = new GridLayout(5, 1, 10, 20);
+            GridLayout gl = new GridLayout(6, 1, 10, 20);
             f.setLayout(gl);
             f.setVisible(true);
             f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -252,13 +258,22 @@ public class Panely extends JPanel {
             JLabel poznamka = new JLabel("Poznámky:   " + kn.getPoznamka());
             JLabel umisteni = new JLabel("Umístění:   " + kn.getUmisteni());
 
+            /* Tlacitko zpet = new Tlacitko("Zpět");
+             zpet.setSize(100, 30);*/
+            Tlacitko upravit = new Tlacitko("Upravit");
+            upravit.setSize(100, 30);
+            upravit.addActionListener(new Upravit_Zobrazit());
+
+
+
             f.add(jmeno);
             f.add(titul);
             f.add(rok);
             f.add(poznamka);
             f.add(umisteni);
-
-            f.setBounds(320, 200, 300, 200);
+            f.add(upravit);
+            // f.add(zpet);
+            f.setBounds(320, 200, 300, 350);
 
 
         }
@@ -395,12 +410,13 @@ public class Panely extends JPanel {
         public void actionPerformed(ActionEvent e) {
             Kniha kp;
 
-            JFrame f = new JFrame("Kniha");
+            
 
             //if (oznaceno_List == false) {
 
             setSoucastne(getDateTime());
             if (!getSoucastne().equals(getPred())) {
+                
                 if (Panely.pocet == Okno.knihovna.velikost()) {
 
                     int i = (int) (e.getActionCommand().charAt(0));
@@ -409,7 +425,8 @@ public class Panely extends JPanel {
                     //   kp = Okno.knihovna.getI(i - 49);
                     kp = Okno.knihovna.getI(n);
 
-                    GridLayout gl = new GridLayout(5, 1, 10, 20);
+                    GridLayout gl = new GridLayout(6, 1, 10, 20);
+
                     f.setLayout(gl);
                     f.setVisible(true);
                     f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -420,13 +437,18 @@ public class Panely extends JPanel {
                     JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
                     JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
+
+
                     f.add(jmeno);
                     f.add(titul);
                     f.add(rok);
                     f.add(poznamka);
                     f.add(umisteni);
 
-                    f.setBounds(320, 200, 300, 200);
+                    Tlacitko upravit = new Tlacitko("Upravit");
+                    upravit.addActionListener(new Upravit_Hledat());
+                    f.add(upravit);
+                    f.setBounds(320, 200, 300, 350);
 
                     oznaceno_List = true;
                     setPred(getDateTime());
@@ -437,7 +459,7 @@ public class Panely extends JPanel {
                     System.out.println(Panely.kn);
                     kp = Panely.kn.getI(n);
 
-                    GridLayout gl = new GridLayout(5, 1, 10, 20);
+                    GridLayout gl = new GridLayout(6, 1, 10, 20);
                     f.setLayout(gl);
                     f.setVisible(true);
                     f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -453,8 +475,11 @@ public class Panely extends JPanel {
                     f.add(rok);
                     f.add(poznamka);
                     f.add(umisteni);
-
-                    f.setBounds(320, 200, 300, 200);
+                    
+                    Tlacitko upravit = new Tlacitko("Upravit");
+                    upravit.addActionListener(new Upravit_Hledat());
+                    f.add(upravit);
+                    f.setBounds(320, 200, 300, 350);
 
 
                     oznaceno_List = true;
