@@ -8,9 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -21,12 +24,6 @@ import static semestralka.Panely.n;
 
 public class PomocnaOkna extends JFrame {
 
-    /*  // nahrazeno v PANELy
-     * static int pocet;                     
-     static Knihovna kn = new Knihovna();
-     static JTextField text = new JTextField();
-     private int n;
-     static List li = new List(Okno.knihovna.velikost());*/
     private int n;
     private int pocet;
     JLabel l1 = new JLabel("Zadejte jméno autora: ");
@@ -49,6 +46,7 @@ public class PomocnaOkna extends JFrame {
     JFormattedTextField numberField = new JFormattedTextField(f);
     static int index;
     String metoda;
+    private String pred, ted;
 
     public PomocnaOkna() {
 
@@ -67,10 +65,27 @@ public class PomocnaOkna extends JFrame {
         this.setVisible(true);
     }
 
+    public String getPred() {
+        return pred;
+    }
+
+    public void setPred(String pred) {
+        this.pred = pred;
+    }
+
+    public String getTed() {
+        return ted;
+    }
+
+    public void setTed(String ted) {
+        this.ted = ted;
+    }
+
     void upravit() {
         GridLayout gl = new GridLayout(8, 2, 5, 20);
-        
-        
+
+
+
         this.setResizable(false);
         this.setLayout(gl);
 
@@ -90,6 +105,7 @@ public class PomocnaOkna extends JFrame {
         this.add(t7);
 
         Kniha k = new Kniha();
+
 
         if ("Hledat".equals(metoda)) {
             if (Panely.pocet == Okno.knihovna.velikost()) {
@@ -113,16 +129,17 @@ public class PomocnaOkna extends JFrame {
                 t6.setText(k.getPoznamka());
                 t7.setText(k.getRok());
             }
+
         }
-        if("Zobrazit".equals(metoda)){
+        if ("Zobrazit".equals(metoda)) {
             k = Okno.knihovna.getI(index);
-                t1.setText(k.getJmeno());
-                t2.setText(k.getPrijmeni());
-                t3.setText(k.getNazev());
-                t4.setText(k.getZanr());
-                t5.setText(k.getUmisteni());
-                t6.setText(k.getPoznamka());
-                t7.setText(k.getRok());
+            t1.setText(k.getJmeno());
+            t2.setText(k.getPrijmeni());
+            t3.setText(k.getNazev());
+            t4.setText(k.getZanr());
+            t5.setText(k.getUmisteni());
+            t6.setText(k.getPoznamka());
+            t7.setText(k.getRok());
         }
         Tlacitko hotovo = new Tlacitko("Hotovo");
         hotovo.addActionListener(new Hotovo_hledat());
@@ -179,7 +196,7 @@ public class PomocnaOkna extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+
             Kniha k = new Kniha();
             int q = 0;
             k.prectiJmeno(t1.getText());
@@ -191,12 +208,6 @@ public class PomocnaOkna extends JFrame {
 
             k.prectiRok(t7.getText());
 
-
-
-            // Okno.knihovna.pridej(k);
-            // Okno.pomocna = Okno.knihovna;
-            // Okno.list.removeAll();
-            // Panely.li.removeAll();
 
             if (Panely.pocet == Okno.knihovna.velikost()) { // kdyz je vyhledavani stejne jako cela knihovna (nezacalo se hledat)
 
@@ -236,7 +247,7 @@ public class PomocnaOkna extends JFrame {
                     for (int i = 0; i < Okno.knihovna.velikost(); i++) {
                         Panely.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
                         Panely.kn = Okno.knihovna;
-                        
+
                     }
                 } else {
                     for (int i = 0; i < Okno.knihovna.velikost(); i++) {
@@ -245,7 +256,6 @@ public class PomocnaOkna extends JFrame {
                         Panely.text.setText(null);
                     }
                 }
-                // Panely.kn.UpravI(k, index);
             }
             Okno.list.removeAll();
 
@@ -299,17 +309,6 @@ public class PomocnaOkna extends JFrame {
         }
     }
 
-    void zobrazit() {
-       
-        Okno.list.removeAll();
-        for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-            Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
-        }
-        add(Okno.list);
-        Okno.list.addActionListener(new ListAction());
-        Okno.list.addItemListener(new ItemAction());
-    }
- // nepotrebna metoda asi(nahrazeno panel_vyhledat)
     private class ListAction implements ActionListener {
 
         @Override
@@ -317,63 +316,68 @@ public class PomocnaOkna extends JFrame {
             Kniha kp;
 
             JFrame f = new JFrame("Kniha");
-            System.out.println("PomocnaOkna");
 
-            if (Panely.pocet == Okno.knihovna.velikost()) {
+            setTed(getDateTime());
 
-                int i = (int) (e.getActionCommand().charAt(0));
-                System.out.println("vase volba je " + i);
+            if (!getTed().equals(getPred())) {
 
-                kp = Okno.knihovna.getI(i - 49);
+                if (Panely.pocet == Okno.knihovna.velikost()) {
 
-                GridLayout gl = new GridLayout(5, 1, 10, 20);
-                f.setLayout(gl);
-                f.setVisible(true);
-                f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    int i = (int) (e.getActionCommand().charAt(0));
 
-                JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
-                JLabel titul = new JLabel("Titul:   " + kp.getNazev());
-                JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
-                JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
-                JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-                f.add(jmeno);
-                f.add(titul);
-                f.add(rok);
-                f.add(poznamka);
-                f.add(umisteni);
+                    kp = Okno.knihovna.getI(i - 49);
 
-                f.setBounds(320, 200, 300, 200);
+                    GridLayout gl = new GridLayout(5, 1, 10, 20);
+                    f.setLayout(gl);
+                    f.setVisible(true);
+                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                n = 1;
-            } else {
+                    JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
+                    JLabel titul = new JLabel("Titul:   " + kp.getNazev());
+                    JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
+                    JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
+                    JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-                int i = (int) (e.getActionCommand().charAt(0));
+                    f.add(jmeno);
+                    f.add(titul);
+                    f.add(rok);
+                    f.add(poznamka);
+                    f.add(umisteni);
 
-                kp = Panely.kn.getI(i - 49);
+                    f.setBounds(320, 200, 300, 200);
 
-                GridLayout gl = new GridLayout(5, 1, 10, 20);
-                f.setLayout(gl);
-                f.setVisible(true);
-                f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    setPred(getDateTime());
 
-                JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
-                JLabel titul = new JLabel("Titul:   " + kp.getNazev());
-                JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
-                JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
-                JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
+                } else {
 
-                f.add(jmeno);
-                f.add(titul);
-                f.add(rok);
-                f.add(poznamka);
-                f.add(umisteni);
+                    int i = (int) (e.getActionCommand().charAt(0));
 
-                f.setBounds(320, 200, 300, 200);
+                    kp = Panely.kn.getI(i - 49);
 
-                n = 1;
+                    GridLayout gl = new GridLayout(5, 1, 10, 20);
+                    f.setLayout(gl);
+                    f.setVisible(true);
+                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                    JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
+                    JLabel titul = new JLabel("Titul:   " + kp.getNazev());
+                    JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
+                    JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
+                    JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
+
+                    f.add(jmeno);
+                    f.add(titul);
+                    f.add(rok);
+                    f.add(poznamka);
+                    f.add(umisteni);
+
+                    f.setBounds(320, 200, 300, 200);
+
+                    setPred(getDateTime());
+                }
+
             }
-
         }
     }
 
@@ -391,82 +395,10 @@ public class PomocnaOkna extends JFrame {
 
         }
     }
-    /*
-     public class Zpet implements ActionListener {
 
-     @Override
-     public void actionPerformed(ActionEvent e) {
-            
-     PomocnaOkna.li.removeAll();
-            
-     PomocnaOkna.this.dispose();
-     }
-     }
-
-     public class Smazat implements ActionListener {
-
-     @Override
-     public void actionPerformed(ActionEvent e) {
-
-     Kniha kp = new Kniha();
-            
-            
-     if (PomocnaOkna.pocet == Okno.knihovna.velikost()) {
-
-     Okno.knihovna.Odeber(n);
-     Okno.pomocna = Okno.knihovna;
-     Okno.list.removeAll();
-
-     for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-     Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
-     }
-
-     PomocnaOkna.li.removeAll();
-     for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-     PomocnaOkna.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
-     }
-
-     } else if(PomocnaOkna.pocet != 0) {
-     kp = PomocnaOkna.kn.getI(n);
-     for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-     if (kp.equals(Okno.knihovna.getI(i))) {
-                        
-     Okno.knihovna.Odeber(i);
-     PomocnaOkna.kn.Odeber(n);
-                        
-     Okno.list.removeAll();
-     for (int j = 0; j < Okno.knihovna.velikost(); j++) {
-     Okno.list.add((j + 1) + " - " + Okno.knihovna.toStringAutorDilo(j));
-     }
-
-     }
-     }
-     }
-     else if(PomocnaOkna.pocet == 0){
-     for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-     PomocnaOkna.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
-     }
-     }
-          
-     PomocnaOkna.pocet = PomocnaOkna.kn.velikost();
-     int poc = PomocnaOkna.kn.velikost();
-
-            
-
-     PomocnaOkna.li.removeAll();
-            
-     if (poc != 0) {
-     for (int i = 0; i < PomocnaOkna.kn.velikost(); i++) {
-     PomocnaOkna.li.add((i + 1) + " - " + PomocnaOkna.kn.toStringAutorDilo(i));
-     }
-     } else {
-     for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-     PomocnaOkna.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
-     PomocnaOkna.pocet = Okno.knihovna.velikost();
-     PomocnaOkna.text.setText(null);
-     }
-     }
-            
-     }
-     }*/
+    private String getDateTime() {
+        DateFormat dfFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+        Date dNow = new Date();
+        return dfFormat.format(dNow);
+    }
 }

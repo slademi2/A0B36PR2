@@ -17,7 +17,7 @@ public class Menulista extends JMenuBar {
         this.add(fileMenu);
         
         
-        JMenuItem open = new JMenuItem("Open");
+        
         
         JMenuItem save = new JMenuItem("Save");
         save.addActionListener(new Ulozit());
@@ -26,7 +26,6 @@ public class Menulista extends JMenuBar {
         exit.addActionListener(new Exit());
         
         
-        fileMenu.add(open);
         fileMenu.add(save);
         
         fileMenu.addSeparator();

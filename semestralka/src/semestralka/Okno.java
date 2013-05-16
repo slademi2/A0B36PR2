@@ -1,5 +1,10 @@
 package semestralka;
 
+/**
+ * Tato třída je stěžejní třída programu. její instancí je objekt, který je potomkem JFrame .
+ *
+ * @author Michal
+ */
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -21,10 +26,7 @@ public class Okno extends JFrame {
     public static Panely panelhledat = new Panely();
     static List list = new List(knihovna.velikost());
     static List zobrlist = new List(knihovna.velikost());
-    
-    static int pocet = 0;// jen pro skousku otevirani oken
-    /*public int vyska = 450;
-    public int sirka = 280;*/
+    static int pocet;
 
     public Okno() throws HeadlessException {
 
@@ -32,9 +34,6 @@ public class Okno extends JFrame {
         knihovna.load();
         pomocna.load();
 
-        
-        
-        //this.setBounds(500, 300, vyska, sirka); stare rozmery bezt panelu vyhledat
         int vyska = 455;
         int sirka = 360;
         this.setBounds(400, 200, vyska, sirka);
@@ -76,10 +75,10 @@ public class Okno extends JFrame {
 
         panelodebrat.setVisible(false);
         panelodebrat.odebrat();
-        
-       
+
+
         panelhledat.setVisible(false);
-        
+
         //panelhledat.hledat();
 
         Menulista m = new Menulista();
@@ -90,15 +89,9 @@ public class Okno extends JFrame {
         this.setVisible(true);
 
 
-    }
-
-    void Oknoodeber(Component comp) {
-        this.remove(comp);
-    }
-
-    void OknoPridej(Component comp) {
-        this.add(comp);
-    }
+    } 
+    /*Konstruktor, obsahuje všechna
+     * tlačítka hlavního okna programu*/
 
     static class Novy implements ActionListener {
 
@@ -108,15 +101,10 @@ public class Okno extends JFrame {
             ok.novy();
         }
     }
-
-    static class Zobrazit implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            PomocnaOkna ok = new PomocnaOkna();
-            ok.zobrazit();
-        }
-    }
+    /*
+     * Action listener tlačítka "novy",
+     * vytváří instanci třídy PomocnaOkna
+     */
 
     static class Odebrat implements ActionListener {//zobrazeni knihovny
 
@@ -129,15 +117,6 @@ public class Okno extends JFrame {
         }
     }
 
-    /* static class Hledat implements ActionListener {
-
-     @Override
-     public void actionPerformed(ActionEvent e) {
-     PomocnaOkna ok = new PomocnaOkna();
-     ok.hledat();
-     }
-     }
-     */
     static class Hledat implements ActionListener {
 
         @Override
@@ -146,9 +125,9 @@ public class Okno extends JFrame {
             panelodebrat.setVisible(false);
             panelhledat.setVisible(true);
             panelhledat.hledat();
-            pocet ++;
+            pocet++;
             System.out.println("pocet stisknuti vyhledavani je: " + pocet);
-            
+
         }
     }
 

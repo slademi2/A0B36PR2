@@ -109,7 +109,9 @@ public class Knihovna implements Serializable {
     }
 
     public Kniha getI(int i) {
+      
         return knihovna.get(i);
+        
     }
     public void UpravI(Kniha p ,int i){
         knihovna.set(i, p);

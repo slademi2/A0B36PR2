@@ -30,6 +30,14 @@ public class Panely extends JPanel {
     int predchozi;
     static JFrame f = new JFrame("Kniha");
 
+    public static JFrame getF() {
+        return f;
+    }
+
+    public static void setF(JFrame f) {
+        Panely.f = f;
+    }
+    
     //public int n;
     public String getPred() {
         return pred;
@@ -206,16 +214,19 @@ public class Panely extends JPanel {
     }
 
     private static class Upravit_Hledat implements ActionListener {
-        public Upravit_Hledat(){
+
+        public Upravit_Hledat() {
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            Panely.f.dispose();
+
             System.out.println("UPRAVIT");
             PomocnaOkna p = new PomocnaOkna(n, "Hledat");
             p.upravit();
             p.setVisible(true);
-        } 
+            getF().dispose();
+        }
     }
 
     private static class Upravit_Zobrazit implements ActionListener {
@@ -239,7 +250,7 @@ public class Panely extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             Kniha kn = new Kniha();
-            
+
             //System.out.println(e.getActionCommand().charAt(0));
 
             int i = (int) (e.getActionCommand().charAt(0));
@@ -274,6 +285,8 @@ public class Panely extends JPanel {
             f.add(upravit);
             // f.add(zpet);
             f.setBounds(320, 200, 300, 350);
+
+
 
 
         }
@@ -410,26 +423,28 @@ public class Panely extends JPanel {
         public void actionPerformed(ActionEvent e) {
             Kniha kp;
 
+            JFrame k = new JFrame();
             
 
             //if (oznaceno_List == false) {
 
             setSoucastne(getDateTime());
             if (!getSoucastne().equals(getPred())) {
-                
+
                 if (Panely.pocet == Okno.knihovna.velikost()) {
 
                     int i = (int) (e.getActionCommand().charAt(0));
                     System.out.println("vase volba je " + i);
+
 
                     //   kp = Okno.knihovna.getI(i - 49);
                     kp = Okno.knihovna.getI(n);
 
                     GridLayout gl = new GridLayout(6, 1, 10, 20);
 
-                    f.setLayout(gl);
-                    f.setVisible(true);
-                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    k.setLayout(gl);
+                    k.setVisible(true);
+                    k.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                     JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
                     JLabel titul = new JLabel("Titul:   " + kp.getNazev());
@@ -437,20 +452,19 @@ public class Panely extends JPanel {
                     JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
                     JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-
-
-                    f.add(jmeno);
-                    f.add(titul);
-                    f.add(rok);
-                    f.add(poznamka);
-                    f.add(umisteni);
+                    k.add(jmeno);
+                    k.add(titul);
+                    k.add(rok);
+                    k.add(poznamka);
+                    k.add(umisteni);
 
                     Tlacitko upravit = new Tlacitko("Upravit");
                     upravit.addActionListener(new Upravit_Hledat());
-                    f.add(upravit);
-                    f.setBounds(320, 200, 300, 350);
+                    k.add(upravit);
+                    k.setBounds(320, 200, 300, 350);
 
-                    oznaceno_List = true;
+                    
+                    setF(k);
                     setPred(getDateTime());
                 } else {
 
@@ -460,9 +474,9 @@ public class Panely extends JPanel {
                     kp = Panely.kn.getI(n);
 
                     GridLayout gl = new GridLayout(6, 1, 10, 20);
-                    f.setLayout(gl);
-                    f.setVisible(true);
-                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    k.setLayout(gl);
+                    k.setVisible(true);
+                    k.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                     JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
                     JLabel titul = new JLabel("Titul:   " + kp.getNazev());
@@ -470,20 +484,19 @@ public class Panely extends JPanel {
                     JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
                     JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-                    f.add(jmeno);
-                    f.add(titul);
-                    f.add(rok);
-                    f.add(poznamka);
-                    f.add(umisteni);
-                    
+                    k.add(jmeno);
+                    k.add(titul);
+                    k.add(rok);
+                    k.add(poznamka);
+                    k.add(umisteni);
+
                     Tlacitko upravit = new Tlacitko("Upravit");
                     upravit.addActionListener(new Upravit_Hledat());
-                    f.add(upravit);
-                    f.setBounds(320, 200, 300, 350);
+                    k.add(upravit);
+                    k.setBounds(320, 200, 300, 350);
 
-
-                    oznaceno_List = true;
                     setPred(getDateTime());
+                    setF(k);
                 }
             }
 
@@ -495,16 +508,13 @@ public class Panely extends JPanel {
 
         @Override
         public void itemStateChanged(ItemEvent e) {
-            //if (oznaceno == false) {
+
+
             String s = (e.getItem().toString());
-            if (predchozi != Integer.parseInt(s)) {
 
                 System.out.println("Vybrána kniha číslo: " + s);
                 n = Integer.parseInt(s);
-                oznaceno = true;
-                predchozi = n;
-            }
-            // }
+                
         }
     }
 
