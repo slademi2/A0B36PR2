@@ -226,9 +226,6 @@ public class PomocnaOkna extends JFrame {
     
 
     public PomocnaOkna() {
-
-
-
         this.setVisible(true);
         this.setBounds(320, 200, 300, 500);
 
@@ -260,9 +257,6 @@ public class PomocnaOkna extends JFrame {
 
     void upravit() {
         GridLayout gl = new GridLayout(8, 2, 5, 20);
-        
-
-
         this.setResizable(false);
         this.setLayout(gl);
 

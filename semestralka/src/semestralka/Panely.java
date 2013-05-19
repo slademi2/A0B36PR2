@@ -109,7 +109,7 @@ public class Panely extends JPanel {
     public void setPredchozi(int predchozi) {
         this.predchozi = predchozi;
     }
-    
+
     public static JFrame getF() {
         return f;
     }
@@ -117,7 +117,7 @@ public class Panely extends JPanel {
     public static void setF(JFrame f) {
         Panely.f = f;
     }
-    
+
     public String getPred() {
         return pred;
     }
@@ -142,9 +142,9 @@ public class Panely extends JPanel {
 
     void odebrat() { // panel zobrazit, spatne pojmenovani
 
-        int vyska = 455;
-        int sirka = 340;
-        this.setSize(vyska, sirka);
+        setVyska(455);
+        setSirka(340);
+        this.setSize(getVyska(), getSirka());
 
         for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
 
@@ -197,10 +197,10 @@ public class Panely extends JPanel {
     void hledat() {
         Panely.getLi().removeAll();
         this.setVisible(true);
-        int vyska = 455;
-        int sirka = 340;
-        this.setSize(vyska, sirka);
-        
+        setVyska(455);
+        setSirka(340);
+        this.setSize(getVyska(), getSirka());
+
         for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
             Panely.getLi().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
         }
@@ -295,7 +295,7 @@ public class Panely extends JPanel {
         public void actionPerformed(ActionEvent e) {
 
             System.out.println("UPRAVIT");
-            PomocnaOkna p = new PomocnaOkna(n, "Hledat");
+            PomocnaOkna p = new PomocnaOkna(getN(), "Hledat");
             p.upravit();
             p.setVisible(true);
             getF().dispose();
@@ -310,7 +310,7 @@ public class Panely extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("UPRAVIT");
-            PomocnaOkna p = new PomocnaOkna(n, "Zobrazit");
+            PomocnaOkna p = new PomocnaOkna(getN(), "Zobrazit");
             p.upravit();
             p.setVisible(true);
             getF().dispose();
@@ -318,7 +318,7 @@ public class Panely extends JPanel {
         }
     }
 
-    private class ListAction implements ActionListener  {
+    private class ListAction implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -339,13 +339,9 @@ public class Panely extends JPanel {
             JLabel poznamka = new JLabel("Poznámky:   " + kl.getPoznamka());
             JLabel umisteni = new JLabel("Umístění:   " + kl.getUmisteni());
 
-            /* Tlacitko zpet = new Tlacitko("Zpět");
-             zpet.setSize(100, 30);*/
             Tlacitko upravit = new Tlacitko("Upravit");
             upravit.setSize(100, 30);
             upravit.addActionListener(new Upravit_Zobrazit());
-
-
 
             getF().add(jmeno);
             getF().add(titul);
@@ -353,12 +349,8 @@ public class Panely extends JPanel {
             getF().add(poznamka);
             getF().add(umisteni);
             getF().add(upravit);
-            // f.add(zpet);
+
             getF().setBounds(320, 200, 300, 350);
-
-
-
-
         }
     }
 
@@ -367,7 +359,7 @@ public class Panely extends JPanel {
         @Override
         public void itemStateChanged(ItemEvent e) {
             String s = (e.getItem().toString());
-            n = Integer.parseInt(s);
+            setN(Integer.parseInt(s));
         }
     }
 
@@ -375,15 +367,11 @@ public class Panely extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Okno.hlavnipanel.setVisible(true);
-            Okno.panelodebrat.remove(Okno.list);
-            Okno.panelodebrat.add(Okno.list);
-            Okno.panelodebrat.setVisible(false);
-            Okno.panelhledat.setVisible(false);
-
-            //Okno.panelhledat.remove(Panely.li);
-            //Okno.panelhledat.add(PomocnaOkna.li);
-
+            Okno.getHlavnipanel().setVisible(true);
+            Okno.getPanelodebrat().remove(Okno.getList());
+            Okno.getPanelodebrat().add(Okno.getList());
+            Okno.getPanelodebrat().setVisible(false);
+            Okno.getPanelhledat().setVisible(false);
         }
     }
 
@@ -391,14 +379,14 @@ public class Panely extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Okno.hlavnipanel.setVisible(true);
-            Okno.panelodebrat.remove(Okno.list);
-            Okno.panelodebrat.add(Okno.list);
-            Okno.panelodebrat.setVisible(false);
-            Okno.panelhledat.setVisible(false);
-            Okno.panelhledat.removeAll();
-            oznaceno = false;
-            oznaceno_List = false;
+            Okno.getHlavnipanel().setVisible(true);
+            Okno.getPanelodebrat().remove(Okno.getList());
+            Okno.getPanelodebrat().add(Okno.getList());
+            Okno.getPanelodebrat().setVisible(false);
+            Okno.getPanelhledat().setVisible(false);
+            Okno.getPanelhledat().removeAll();
+            //oznaceno = false;
+            //oznaceno_List = false;
 
         }
     }
@@ -409,14 +397,14 @@ public class Panely extends JPanel {
         public void actionPerformed(ActionEvent e) {
 
 
-            Okno.knihovna.Odeber(n);
+            Okno.getKnihovna().Odeber(getN());
 
-            System.out.println(Okno.knihovna.velikost());
-            Okno.pomocna = Okno.knihovna;
-            Okno.list.removeAll();
+            System.out.println(Okno.getKnihovna().velikost());
+            Okno.setPomocna(Okno.getKnihovna());
+            Okno.getList().removeAll();
 
-            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+            for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
             }
         }
     }
@@ -429,58 +417,58 @@ public class Panely extends JPanel {
             Kniha kp = new Kniha();
 
 
-            if (Panely.pocet == Okno.knihovna.velikost()) {
+            if (Panely.getPocet() == Okno.getKnihovna().velikost()) {
 
-                Okno.knihovna.Odeber(n);
-                Okno.pomocna = Okno.knihovna;
-                Okno.list.removeAll();
+                Okno.getKnihovna().Odeber(getN());
+                Okno.setPomocna(Okno.getKnihovna());
+                Okno.getList().removeAll();
 
-                for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                    Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+                for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                    Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
                 }
 
-                Panely.li.removeAll();
-                for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                    Panely.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+                Panely.getLi().removeAll();
+                for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
                 }
 
-            } else if (Panely.pocet != 0) {
-                kp = Panely.kn.getI(n);
-                for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                    if (kp.equals(Okno.knihovna.getI(i))) {
+            } else if (Panely.getPocet() != 0) {
+                kp = Panely.getKn().getI(getN());
+                for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                    if (kp.equals(Okno.getKnihovna().getI(i))) {
 
-                        Okno.knihovna.Odeber(i);
-                        Panely.kn.Odeber(n);
+                        Okno.getKnihovna().Odeber(i);
+                        Panely.getKn().Odeber(getN());
 
-                        Okno.list.removeAll();
-                        for (int j = 0; j < Okno.knihovna.velikost(); j++) {
-                            Okno.list.add((j + 1) + " - " + Okno.knihovna.toStringAutorDilo(j));
+                        Okno.getList().removeAll();
+                        for (int j = 0; j < Okno.getKnihovna().velikost(); j++) {
+                            Okno.getList().add((j + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(j));
                         }
 
                     }
                 }
-            } else if (Panely.pocet == 0) {
-                for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                    Panely.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+            } else if (Panely.getPocet() == 0) {
+                for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
                 }
             }
 
-            Panely.pocet = Panely.kn.velikost();
-            int poc = Panely.kn.velikost();
+            Panely.setPocet(Panely.getKn().velikost());
+            int poc = Panely.getKn().velikost();
 
 
 
-            Panely.li.removeAll();
+            Panely.getLi().removeAll();
 
             if (poc != 0) {
-                for (int i = 0; i < Panely.kn.velikost(); i++) {
-                    Panely.li.add((i + 1) + " - " + Panely.kn.toStringAutorDilo(i));
+                for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
                 }
             } else {
-                for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                    Panely.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
-                    Panely.pocet = Okno.knihovna.velikost();
-                    Panely.text.setText(null);
+                for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
+                    Panely.setPocet(Okno.getKnihovna().velikost());
+                    Panely.getText().setText(null);
                 }
             }
 
@@ -494,21 +482,13 @@ public class Panely extends JPanel {
             Kniha kp;
 
             JFrame k = new JFrame();
-            
-
-            //if (oznaceno_List == false) {
 
             setSoucastne(getDateTime());
             if (!getSoucastne().equals(getPred())) {
 
-                if (Panely.pocet == Okno.knihovna.velikost()) {
+                if (Panely.getPocet() == Okno.getKnihovna().velikost()) {
 
-                    int i = (int) (e.getActionCommand().charAt(0));
-                    System.out.println("vase volba je " + i);
-
-
-                    //   kp = Okno.knihovna.getI(i - 49);
-                    kp = Okno.knihovna.getI(n);
+                    kp = Okno.getKnihovna().getI(getN());
 
                     GridLayout gl = new GridLayout(6, 1, 10, 20);
 
@@ -533,15 +513,13 @@ public class Panely extends JPanel {
                     k.add(upravit);
                     k.setBounds(320, 200, 300, 350);
 
-                    
+
                     setF(k);
                     setPred(getDateTime());
                 } else {
 
-                    int i = (int) (e.getActionCommand().charAt(0) - 49);
-                    System.out.println("Vybiras " + i);
-                    System.out.println(Panely.kn);
-                    kp = Panely.kn.getI(n);
+
+                    kp = Panely.getKn().getI(getN());
 
                     GridLayout gl = new GridLayout(6, 1, 10, 20);
                     k.setLayout(gl);
@@ -578,13 +556,9 @@ public class Panely extends JPanel {
 
         @Override
         public void itemStateChanged(ItemEvent e) {
-
-
             String s = (e.getItem().toString());
+            setN(Integer.parseInt(s));
 
-                System.out.println("Vybrána kniha číslo: " + s);
-                n = Integer.parseInt(s);
-                
         }
     }
 
