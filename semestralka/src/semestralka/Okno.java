@@ -1,7 +1,8 @@
 package semestralka;
 
 /**
- * Tato třída je stěžejní třída programu. její instancí je objekt, který je potomkem JFrame .
+ * Tato třída je stěžejní třída programu. její instancí je objekt, který je
+ * potomkem JFrame .
  *
  * @author Michal
  */
@@ -26,13 +27,83 @@ public class Okno extends JFrame {
     public static Panely panelhledat = new Panely();
     static List list = new List(knihovna.velikost());
     static List zobrlist = new List(knihovna.velikost());
-    static int pocet;
+    private static int pocet;
 
+    public static Knihovna getKnihovna() {
+        return knihovna;
+    }
+
+    public static void setKnihovna(Knihovna knihovna) {
+        Okno.knihovna = knihovna;
+    }
+
+    public static Knihovna getPomocna() {
+        return pomocna;
+    }
+
+    public static void setPomocna(Knihovna pomocna) {
+        Okno.pomocna = pomocna;
+    }
+
+    public static Panely getHlavnipanel() {
+        return hlavnipanel;
+    }
+
+    public static void setHlavnipanel(Panely hlavnipanel) {
+        Okno.hlavnipanel = hlavnipanel;
+    }
+
+    public static Panely getPanelodebrat() {
+        return panelodebrat;
+    }
+
+    public static void setPanelodebrat(Panely panelodebrat) {
+        Okno.panelodebrat = panelodebrat;
+    }
+
+    public static Panely getPanelhledat() {
+        return panelhledat;
+    }
+
+    public static void setPanelhledat(Panely panelhledat) {
+        Okno.panelhledat = panelhledat;
+    }
+
+    public static List getList() {
+        return list;
+    }
+
+    public static void setList(List list) {
+        Okno.list = list;
+    }
+
+    public static List getZobrlist() {
+        return zobrlist;
+    }
+
+    public static void setZobrlist(List zobrlist) {
+        Okno.zobrlist = zobrlist;
+    }
+
+    public static int getPocet() {
+        return pocet;
+    }
+
+    public static void setPocet(int pocet) {
+        Okno.pocet = pocet;
+    }
+       
+    
+    
     public Okno() throws HeadlessException {
 
         super("Moje Okno");
-        knihovna.load();
-        pomocna.load();
+        Knihovna kn = new Knihovna();
+        kn.load();
+        setKnihovna(kn);
+        //knihovna.load();
+        //pomocna.load();
+        setPomocna(kn);
 
         int vyska = 455;
         int sirka = 360;
@@ -64,32 +135,37 @@ public class Okno extends JFrame {
         Tlacitko konec = new Tlacitko("Ukončit program");
         konec.setBounds(50, 190, 150, 30);
         konec.addActionListener(new Konec());
+        
+        Panely hlavnipanely = new Panely();
 
-        hlavnipanel.add(l1);
-        hlavnipanel.add(odebrat);
-        hlavnipanel.add(novy);
-        hlavnipanel.add(hledat);
-        hlavnipanel.add(uloz);
-        hlavnipanel.add(konec);
+        hlavnipanely.add(l1);
+        hlavnipanely.add(odebrat);
+        hlavnipanely.add(novy);
+        hlavnipanely.add(hledat);
+        hlavnipanely.add(uloz);
+        hlavnipanely.add(konec);
 
+        setHlavnipanel(hlavnipanely);
+        
+        Panely panelodebrati = new Panely();
+        panelodebrati.setVisible(false);
+        panelodebrati.odebrat();
+        setPanelodebrat(panelodebrati);
 
-        panelodebrat.setVisible(false);
-        panelodebrat.odebrat();
-
-
-        panelhledat.setVisible(false);
+        getPanelhledat().setVisible(false);
+       // panelhledat.setVisible(false);
 
         //panelhledat.hledat();
 
         Menulista m = new Menulista();
         setJMenuBar(m);
-        add(panelhledat);
-        add(panelodebrat);
-        add(hlavnipanel);
+        add(getPanelhledat());
+        add(getPanelodebrat());
+        add(getHlavnipanel());
         this.setVisible(true);
 
 
-    } 
+    }
     /*Konstruktor, obsahuje všechna
      * tlačítka hlavního okna programu*/
 
@@ -110,9 +186,9 @@ public class Okno extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            hlavnipanel.setVisible(false);
-            panelodebrat.setVisible(true);
-            panelhledat.setVisible(false);
+            getHlavnipanel().setVisible(false);
+            getPanelodebrat().setVisible(true);
+            getPanelhledat().setVisible(false);
 
         }
     }
@@ -121,12 +197,14 @@ public class Okno extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            hlavnipanel.setVisible(false);
-            panelodebrat.setVisible(false);
-            panelhledat.setVisible(true);
-            panelhledat.hledat();
-            pocet++;
-            System.out.println("pocet stisknuti vyhledavani je: " + pocet);
+            getHlavnipanel().setVisible(false);
+            getPanelodebrat().setVisible(false);
+            getPanelhledat().setVisible(true);
+            getPanelhledat().hledat();
+           int p = Okno.getPocet();
+           p++;
+            Okno.setPocet(p);
+            System.out.println("pocet stisknuti vyhledavani je: " + Okno.getPocet());
 
         }
     }
@@ -141,28 +219,24 @@ public class Okno extends JFrame {
             if (n == 1) {
                 frame.dispose();
             } else {
-                Okno.knihovna.save();
+                Okno.getKnihovna().save();
                 System.exit(0);
 
             }
         }
     }
+    /*
+     Metoda konec / ukončuje program, ukládá knihovnu
+     */
 
     public class Zpet implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            hlavnipanel.setVisible(true);
-            panelodebrat.setVisible(false);
-            panelhledat.setVisible(false);
+            getHlavnipanel().setVisible(true);
+            getPanelodebrat().setVisible(false);
+            getPanelhledat().setVisible(false);
 
-        }
-    }
-
-    public class Zpet_Hledat implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
         }
     }
 
@@ -170,7 +244,10 @@ public class Okno extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Okno.knihovna.save();
+            Okno.getKnihovna().save();
         }
     }
+    /*
+     ActionListener tlacitka ulozit, uklada knihovnu
+     */
 }

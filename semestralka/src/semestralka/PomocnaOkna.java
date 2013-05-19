@@ -24,8 +24,8 @@ import static semestralka.Panely.n;
 
 public class PomocnaOkna extends JFrame {
 
-    private int n;
-    private int pocet;
+    private static int n;
+    private static int pocet;
     JLabel l1 = new JLabel("Zadejte jméno autora: ");
     static JTextArea t1 = new JTextArea("", 1, 15);
     JLabel l2 = new JLabel("Zadejte příjmení autora: ");
@@ -47,6 +47,183 @@ public class PomocnaOkna extends JFrame {
     static int index;
     String metoda;
     private String pred, ted;
+
+    public int getN() {
+        return n;
+    }
+
+    public void setN(int n) {
+        this.n = n;
+    }
+
+    public int getPocet() {
+        return pocet;
+    }
+
+    public void setPocet(int pocet) {
+        this.pocet = pocet;
+    }
+
+    public JLabel getL1() {
+        return l1;
+    }
+
+    public void setL1(JLabel l1) {
+        this.l1 = l1;
+    }
+
+    public static JTextArea getT1() {
+        return t1;
+    }
+
+    public static void setT1(JTextArea t1) {
+        PomocnaOkna.t1 = t1;
+    }
+
+    public JLabel getL2() {
+        return l2;
+    }
+
+    public void setL2(JLabel l2) {
+        this.l2 = l2;
+    }
+
+    public static JTextArea getT2() {
+        return t2;
+    }
+
+    public static void setT2(JTextArea t2) {
+        PomocnaOkna.t2 = t2;
+    }
+
+    public JLabel getL3() {
+        return l3;
+    }
+
+    public void setL3(JLabel l3) {
+        this.l3 = l3;
+    }
+
+    public static JTextArea getT3() {
+        return t3;
+    }
+
+    public static void setT3(JTextArea t3) {
+        PomocnaOkna.t3 = t3;
+    }
+
+    public JLabel getL4() {
+        return l4;
+    }
+
+    public void setL4(JLabel l4) {
+        this.l4 = l4;
+    }
+
+    public static JTextArea getT4() {
+        return t4;
+    }
+
+    public static void setT4(JTextArea t4) {
+        PomocnaOkna.t4 = t4;
+    }
+
+    public JLabel getL5() {
+        return l5;
+    }
+
+    public void setL5(JLabel l5) {
+        this.l5 = l5;
+    }
+
+    public static JTextArea getT5() {
+        return t5;
+    }
+
+    public static void setT5(JTextArea t5) {
+        PomocnaOkna.t5 = t5;
+    }
+
+    public JLabel getL6() {
+        return l6;
+    }
+
+    public void setL6(JLabel l6) {
+        this.l6 = l6;
+    }
+
+    public static JTextArea getT6() {
+        return t6;
+    }
+
+    public static void setT6(JTextArea t6) {
+        PomocnaOkna.t6 = t6;
+    }
+
+    public JLabel getL7() {
+        return l7;
+    }
+
+    public void setL7(JLabel l7) {
+        this.l7 = l7;
+    }
+
+    public static JTextArea getT7() {
+        return t7;
+    }
+
+    public static void setT7(JTextArea t7) {
+        PomocnaOkna.t7 = t7;
+    }
+
+    public Tlacitko getVytvorit() {
+        return vytvorit;
+    }
+
+    public void setVytvorit(Tlacitko vytvorit) {
+        this.vytvorit = vytvorit;
+    }
+
+    public Tlacitko getZrusit() {
+        return zrusit;
+    }
+
+    public void setZrusit(Tlacitko zrusit) {
+        this.zrusit = zrusit;
+    }
+
+    public NumberFormat getF() {
+        return f;
+    }
+
+    public void setF(NumberFormat f) {
+        this.f = f;
+    }
+
+    public JFormattedTextField getNumberField() {
+        return numberField;
+    }
+
+    public void setNumberField(JFormattedTextField numberField) {
+        this.numberField = numberField;
+    }
+
+    public static int getIndex() {
+        return index;
+    }
+
+    public static void setIndex(int index) {
+        PomocnaOkna.index = index;
+    }
+
+    public String getMetoda() {
+        return metoda;
+    }
+
+    public void setMetoda(String metoda) {
+        this.metoda = metoda;
+    }
+    
 
     public PomocnaOkna() {
 
@@ -83,63 +260,63 @@ public class PomocnaOkna extends JFrame {
 
     void upravit() {
         GridLayout gl = new GridLayout(8, 2, 5, 20);
-
+        
 
 
         this.setResizable(false);
         this.setLayout(gl);
 
-        this.add(l1);
-        this.add(t1);
-        this.add(l2);
-        this.add(t2);
-        this.add(l3);
-        this.add(t3);
-        this.add(l4);
-        this.add(t4);
-        this.add(l5);
-        this.add(t5);
-        this.add(l6);
-        this.add(t6);
-        this.add(l7);
-        this.add(t7);
+        this.add(getL1());
+        this.add(getT1());
+        this.add(getL2());
+        this.add(getT2());
+        this.add(getL3());
+        this.add(getT3());
+        this.add(getL4());
+        this.add(getT4());
+        this.add(getL5());
+        this.add(getT5());
+        this.add(getL6());
+        this.add(getT6());
+        this.add(getL7());
+        this.add(getT7());
 
         Kniha k = new Kniha();
 
 
-        if ("Hledat".equals(metoda)) {
-            if (Panely.pocet == Okno.knihovna.velikost()) {
-                k = Okno.knihovna.getI(index);
-                t1.setText(k.getJmeno());
-                t2.setText(k.getPrijmeni());
-                t3.setText(k.getNazev());
-                t4.setText(k.getZanr());
-                t5.setText(k.getUmisteni());
-                t6.setText(k.getPoznamka());
-                t7.setText(k.getRok());
+        if ("Hledat".equals(getMetoda())) {
+            if (Panely.getPocet() == Okno.getKnihovna().velikost()) {
+                k = Okno.getKnihovna().getI(getIndex());
+                getT1().setText(k.getJmeno());
+                getT2().setText(k.getPrijmeni());
+                getT3().setText(k.getNazev());
+                getT4().setText(k.getZanr());
+                getT5().setText(k.getUmisteni());
+                getT6().setText(k.getPoznamka());
+                getT7().setText(k.getRok());
 
             } else {
-                System.out.println(Panely.kn);
-                k = Panely.kn.getI(index);
-                t1.setText(k.getJmeno());
-                t2.setText(k.getPrijmeni());
-                t3.setText(k.getNazev());
-                t4.setText(k.getZanr());
-                t5.setText(k.getUmisteni());
-                t6.setText(k.getPoznamka());
-                t7.setText(k.getRok());
+                System.out.println(Panely.getKn());
+                k = Panely.getKn().getI(getIndex());
+                getT1().setText(k.getJmeno());
+                getT2().setText(k.getPrijmeni());
+                getT3().setText(k.getNazev());
+                getT4().setText(k.getZanr());
+                getT5().setText(k.getUmisteni());
+                getT6().setText(k.getPoznamka());
+                getT7().setText(k.getRok());
             }
 
         }
-        if ("Zobrazit".equals(metoda)) {
-            k = Okno.knihovna.getI(index);
-            t1.setText(k.getJmeno());
-            t2.setText(k.getPrijmeni());
-            t3.setText(k.getNazev());
-            t4.setText(k.getZanr());
-            t5.setText(k.getUmisteni());
-            t6.setText(k.getPoznamka());
-            t7.setText(k.getRok());
+        if ("Zobrazit".equals(getMetoda())) {
+            k = Okno.getKnihovna().getI(getIndex());
+            getT1().setText(k.getJmeno());
+                getT2().setText(k.getPrijmeni());
+                getT3().setText(k.getNazev());
+                getT4().setText(k.getZanr());
+                getT5().setText(k.getUmisteni());
+                getT6().setText(k.getPoznamka());
+                getT7().setText(k.getRok());
         }
         Tlacitko hotovo = new Tlacitko("Hotovo");
         hotovo.addActionListener(new Hotovo_hledat());
@@ -158,7 +335,7 @@ public class PomocnaOkna extends JFrame {
 
         this.setResizable(false);
         this.setLayout(gl);
-
+/*
         this.add(l1);
         this.add(t1);
         this.add(l2);
@@ -172,22 +349,27 @@ public class PomocnaOkna extends JFrame {
         this.add(l6);
         this.add(t6);
         this.add(l7);
-        this.add(t7);
+        this.add(t7);*/
+        this.add(getL1());
+        this.add(getT1());
+        this.add(getL2());
+        this.add(getT2());
+        this.add(getL3());
+        this.add(getT3());
+        this.add(getL4());
+        this.add(getT4());
+        this.add(getL5());
+        this.add(getT5());
+        this.add(getL6());
+        this.add(getT6());
+        this.add(getL7());
+        this.add(getT7());
 
+        add(getVytvorit());
+        add(getZrusit());
 
-        NumberFormat f = NumberFormat.getInstance();
-
-        f.setGroupingUsed(false);
-
-        JFormattedTextField numberField = new JFormattedTextField(f);
-
-        // this.add(numberField);
-
-        add(vytvorit);
-        add(zrusit);
-
-        vytvorit.addActionListener(new Vytvorit());
-        zrusit.addActionListener(new Zrusit());
+        getVytvorit().addActionListener(new Vytvorit());
+        getZrusit().addActionListener(new Zrusit());
 
         this.pack();
     }
@@ -199,68 +381,64 @@ public class PomocnaOkna extends JFrame {
 
             Kniha k = new Kniha();
             int q = 0;
-            k.prectiJmeno(t1.getText());
-            k.prectiPrijmeni(t2.getText());
-            k.prectiNazev(t3.getText());
-            k.prectiZanr(t4.getText());
-            k.prectiUmisteni(t5.getText());
-            k.prectiPoznamka(t6.getText());
+            k.prectiJmeno(getT1().getText());
+            k.prectiPrijmeni(getT2().getText());
+            k.prectiNazev(getT3().getText());
+            k.prectiZanr(getT4().getText());
+            k.prectiUmisteni(getT5().getText());
+            k.prectiPoznamka(getT6().getText());
+            k.prectiRok(getT7().getText());
 
-            k.prectiRok(t7.getText());
 
-
-            if (Panely.pocet == Okno.knihovna.velikost()) { // kdyz je vyhledavani stejne jako cela knihovna (nezacalo se hledat)
+            if (Panely.getPocet() == Okno.getKnihovna().velikost()) { // kdyz je vyhledavani stejne jako cela knihovna (nezacalo se hledat)
 
                 System.out.println("Stejna");
-                Okno.knihovna.UpravI(k, index);
-                Panely.li.removeAll();
+                Okno.getKnihovna().UpravI(k, getIndex());
+                Panely.getLi().removeAll();
 
-                for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                    Panely.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+                for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
                 }
 
 
             } else { // uz se zacalo hledat
                 Kniha p = new Kniha();
-                if (Panely.pocet != 0) { // kdyz pocet neni rovny nule
-                    p = Panely.kn.getI(index);
-                    for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                        if (p.equals(Okno.knihovna.getI(i))) {
-
-                            Okno.knihovna.UpravI(k, i);
-                            //Panely.kn.Odeber(n);
-
+                if (Panely.getPocet() != 0) { // kdyz pocet neni rovny nule
+                    p = Panely.getKn().getI(getIndex());
+                    for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                        if (p.equals(Okno.getKnihovna().getI(i))) {
+                            Okno.getKnihovna().UpravI(k, i);
                         }
                     }
-                } else if (Panely.pocet == 0) {
-                    for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                        Panely.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+                } else if (Panely.getPocet() == 0) {
+                    for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                        Panely.getLi().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
                     }
                 }
 
-                Panely.pocet = Panely.kn.velikost();
-                int poc = Panely.kn.velikost();
+                Panely.setPocet(Panely.getKn().velikost());
+                int poc = Panely.getKn().velikost();
                 System.out.println("Velikost " + poc);
-                Panely.li.removeAll();
+                Panely.getLi().removeAll();
 
                 if (poc != 0) {
-                    for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                        Panely.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
-                        Panely.kn = Okno.knihovna;
+                    for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                        Panely.getLi().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
+                        Panely.setKn(Okno.getKnihovna());
 
                     }
                 } else {
-                    for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                        Panely.li.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
-                        Panely.pocet = Okno.knihovna.velikost();
-                        Panely.text.setText(null);
+                    for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                        Panely.getLi().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
+                        Panely.setPocet(Okno.getKnihovna().velikost());
+                        Panely.getText().setText(null);
                     }
                 }
             }
-            Okno.list.removeAll();
+            Okno.getList().removeAll();
 
-            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+            for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
             }
             dispose();
         }
@@ -274,30 +452,22 @@ public class PomocnaOkna extends JFrame {
 
             Kniha k = new Kniha();
 
-            k.prectiJmeno(t1.getText());
-            k.prectiPrijmeni(t2.getText());
-            k.prectiNazev(t3.getText());
-            k.prectiZanr(t4.getText());
-            k.prectiUmisteni(t5.getText());
-            k.prectiPoznamka(t6.getText());
+            k.prectiJmeno(getT1().getText());
+            k.prectiPrijmeni(getT2().getText());
+            k.prectiNazev(getT3().getText());
+            k.prectiZanr(getT4().getText());
+            k.prectiUmisteni(getT5().getText());
+            k.prectiPoznamka(getT6().getText());
+            k.prectiRok(getT7().getText());
 
-            k.prectiRok(t7.getText());
+            Okno.getKnihovna().pridej(k);
+            Okno.setPomocna(Okno.getKnihovna());
+            Okno.getList().removeAll();
 
-            // k.prectiRok(Integer.parseInt(numberField.getText()));
-
-            Okno.knihovna.pridej(k);
-            Okno.pomocna = Okno.knihovna;
-            Okno.list.removeAll();
-
-            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+            for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+                Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
             }
-
             dispose();
-
-            // }catch (InvalidYearNumberException ex) {
-
-
         }
     }
 
@@ -308,30 +478,29 @@ public class PomocnaOkna extends JFrame {
             dispose();
         }
     }
-
     private class ListAction implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             Kniha kp;
 
-            JFrame f = new JFrame("Kniha");
+            JFrame l= new JFrame("Kniha");
 
             setTed(getDateTime());
 
-            if (!getTed().equals(getPred())) {
+           // if (!getTed().equals(getPred())) {
 
-                if (Panely.pocet == Okno.knihovna.velikost()) {
+                if (Panely.getPocet() == Okno.getKnihovna().velikost()) {
 
                     int i = (int) (e.getActionCommand().charAt(0));
 
 
-                    kp = Okno.knihovna.getI(i - 49);
+                    kp = Okno.getKnihovna().getI(i - 49);
 
                     GridLayout gl = new GridLayout(5, 1, 10, 20);
-                    f.setLayout(gl);
-                    f.setVisible(true);
-                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    l.setLayout(gl);
+                    l.setVisible(true);
+                    l.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                     JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
                     JLabel titul = new JLabel("Titul:   " + kp.getNazev());
@@ -339,13 +508,13 @@ public class PomocnaOkna extends JFrame {
                     JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
                     JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-                    f.add(jmeno);
-                    f.add(titul);
-                    f.add(rok);
-                    f.add(poznamka);
-                    f.add(umisteni);
+                    l.add(jmeno);
+                    l.add(titul);
+                    l.add(rok);
+                    l.add(poznamka);
+                    l.add(umisteni);
 
-                    f.setBounds(320, 200, 300, 200);
+                    l.setBounds(320, 200, 300, 200);
 
                     setPred(getDateTime());
 
@@ -353,12 +522,12 @@ public class PomocnaOkna extends JFrame {
 
                     int i = (int) (e.getActionCommand().charAt(0));
 
-                    kp = Panely.kn.getI(i - 49);
+                    kp = Panely.getKn().getI(i - 49);
 
                     GridLayout gl = new GridLayout(5, 1, 10, 20);
-                    f.setLayout(gl);
-                    f.setVisible(true);
-                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    l.setLayout(gl);
+                    l.setVisible(true);
+                    l.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                     JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
                     JLabel titul = new JLabel("Titul:   " + kp.getNazev());
@@ -366,16 +535,16 @@ public class PomocnaOkna extends JFrame {
                     JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
                     JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-                    f.add(jmeno);
-                    f.add(titul);
-                    f.add(rok);
-                    f.add(poznamka);
-                    f.add(umisteni);
+                    l.add(jmeno);
+                    l.add(titul);
+                    l.add(rok);
+                    l.add(poznamka);
+                    l.add(umisteni);
 
-                    f.setBounds(320, 200, 300, 200);
+                    l.setBounds(320, 200, 300, 200);
 
                     setPred(getDateTime());
-                }
+              //  }
 
             }
         }
@@ -385,14 +554,10 @@ public class PomocnaOkna extends JFrame {
 
         @Override
         public void itemStateChanged(ItemEvent e) {
-            //PomocnaOkna k = new PomocnaOkna();
-
-
+           
             String s = (e.getItem().toString());
             System.out.println("Vybrána kniha číslo: " + s);
-            n = Integer.parseInt(s);
-
-
+            setN(Integer.parseInt(s));
         }
     }
 
