@@ -28,18 +28,16 @@ public class Knihovna implements Serializable {
     public ArrayList<Kniha> getKnihovna() {
         return knihovna;
     }
-    
-    
 
     public void pridej(Kniha kn) {
-        knihovna.add(kn);
+        getKnihovna().add(kn);
     }
 
     public String tisk() {
         String s = " ";
-        for (int i = 0; i < knihovna.size(); i++) {
+        for (int i = 0; i < getKnihovna().size(); i++) {
 
-            s = knihovna.get(i).toString();
+            s = getKnihovna().get(i).toString();
         }
         return s;
 
@@ -48,15 +46,15 @@ public class Knihovna implements Serializable {
 
     public int velikost() {
         int velikost;
-        velikost = knihovna.size();
+        velikost = getKnihovna().size();
         return velikost;
     }
 
     @Override
     public String toString() {
         String s = "Knihovna obsahuje: ";
-        for (int i = 0; i < knihovna.size(); i++) {
-            s = s + knihovna.get(i).toString();
+        for (int i = 0; i < getKnihovna().size(); i++) {
+            s = s + getKnihovna().get(i).toString();
             return s;
         }
         return s;
@@ -64,15 +62,15 @@ public class Knihovna implements Serializable {
     }
 
     public String toStringAutorDilo(int i) {
-        return knihovna.get(i).getJmeno() + " " + knihovna.get(i).getPrijmeni() + " - "
-                + knihovna.get(i).getNazev() + " , " + knihovna.get(i).getRok();
+        return getKnihovna().get(i).getJmeno() + " " + getKnihovna().get(i).getPrijmeni() + " - "
+                + getKnihovna().get(i).getNazev() + " , " + getKnihovna().get(i).getRok() + "  -  " + getKnihovna().get(i).getZanr();
     }
 
     public void save() {
         try {
             FileOutputStream fwJm = new FileOutputStream("Knihovna.txt");
             ObjectOutputStream fw = new ObjectOutputStream(fwJm);
-            fw.writeObject(knihovna);
+            fw.writeObject(getKnihovna());
             fw.close();
             fwJm.close();
             JOptionPane.showMessageDialog(null, "Successfully saved", "", JOptionPane.INFORMATION_MESSAGE);
@@ -110,16 +108,16 @@ public class Knihovna implements Serializable {
 
     public Kniha getI(int i) {
       
-        return knihovna.get(i);
+        return getKnihovna().get(i);
         
     }
     public void UpravI(Kniha p ,int i){
-        knihovna.set(i, p);
+        getKnihovna().set(i, p);
     }
 
     public void Odeber(int i) {
-        if (i < knihovna.size()) {
-            knihovna.remove(i);
+        if (i < getKnihovna().size()) {
+            getKnihovna().remove(i);
         } else {
             JOptionPane.showMessageDialog(null, " Nebya vybrána žádná kniha pro smazání !!", "", JOptionPane.ERROR_MESSAGE);
         }
@@ -130,10 +128,10 @@ public class Knihovna implements Serializable {
         s = s.toLowerCase();
         Knihovna kn = new Knihovna();
         String jmeno;
-        for(int i = 0; i <Okno.knihovna.velikost();i++){
-           jmeno = Okno.knihovna.getI(i).getJmeno().toLowerCase();
+        for(int i = 0; i <Okno.getKnihovna().velikost();i++){
+           jmeno = Okno.getKnihovna().getI(i).getJmeno().toLowerCase();
            if(jmeno.contains(s)){
-               kn.pridej(Okno.knihovna.getI(i));
+               kn.pridej(Okno.getKnihovna().getI(i));
            }
         }
         return kn;
@@ -142,10 +140,10 @@ public class Knihovna implements Serializable {
         s = s.toLowerCase();
         Knihovna kn = new Knihovna();
         String jmeno;
-        for(int i = 0; i <Okno.knihovna.velikost();i++){
-           jmeno = Okno.knihovna.getI(i).getPrijmeni().toLowerCase();
+        for(int i = 0; i <Okno.getKnihovna().velikost();i++){
+           jmeno = Okno.getKnihovna().getI(i).getPrijmeni().toLowerCase();
            if(jmeno.contains(s)){
-               kn.pridej(Okno.knihovna.getI(i));
+               kn.pridej(Okno.getKnihovna().getI(i));
            }
         }
         return kn;
@@ -154,10 +152,10 @@ public class Knihovna implements Serializable {
         s = s.toLowerCase();
         Knihovna kn = new Knihovna();
         String jmeno;
-        for(int i = 0; i <Okno.knihovna.velikost();i++){
-           jmeno = Okno.knihovna.getI(i).getRok().toLowerCase();
+        for(int i = 0; i <Okno.getKnihovna().velikost();i++){
+           jmeno = Okno.getKnihovna().getI(i).getRok().toLowerCase();
            if(jmeno.contains(s)){
-               kn.pridej(Okno.knihovna.getI(i));
+               kn.pridej(Okno.getKnihovna().getI(i));
            }
         }
         return kn;
@@ -166,10 +164,10 @@ public class Knihovna implements Serializable {
         s = s.toLowerCase();
         Knihovna kn = new Knihovna();
         String jmeno;
-        for(int i = 0; i <Okno.knihovna.velikost();i++){
-           jmeno = Okno.knihovna.getI(i).getNazev().toLowerCase();
+        for(int i = 0; i <Okno.getKnihovna().velikost();i++){
+           jmeno = Okno.getKnihovna().getI(i).getNazev().toLowerCase();
            if(jmeno.contains(s)){
-               kn.pridej(Okno.knihovna.getI(i));
+               kn.pridej(Okno.getKnihovna().getI(i));
            }
         }
         return kn;
@@ -178,10 +176,10 @@ public class Knihovna implements Serializable {
         s = s.toLowerCase();
         Knihovna kn = new Knihovna();
         String jmeno;
-        for(int i = 0; i <Okno.knihovna.velikost();i++){
-           jmeno = Okno.knihovna.getI(i).getUmisteni().toLowerCase();
+        for(int i = 0; i <Okno.getKnihovna().velikost();i++){
+           jmeno = Okno.getKnihovna().getI(i).getUmisteni().toLowerCase();
            if(jmeno.contains(s)){
-               kn.pridej(Okno.knihovna.getI(i));
+               kn.pridej(Okno.getKnihovna().getI(i));
            }
         }
         return kn;
@@ -190,10 +188,10 @@ public class Knihovna implements Serializable {
         s = s.toLowerCase();
         Knihovna kn = new Knihovna();
         String jmeno;
-        for(int i = 0; i <Okno.knihovna.velikost();i++){
-           jmeno = Okno.knihovna.getI(i).getZanr().toLowerCase();
+        for(int i = 0; i <Okno.getKnihovna().velikost();i++){
+           jmeno = Okno.getKnihovna().getI(i).getZanr().toLowerCase();
            if(jmeno.contains(s)){
-               kn.pridej(Okno.knihovna.getI(i));
+               kn.pridej(Okno.getKnihovna().getI(i));
            }
         }
         return kn;
@@ -202,10 +200,10 @@ public class Knihovna implements Serializable {
         s = s.toLowerCase();
         Knihovna kn = new Knihovna();
         String jmeno;
-        for(int i = 0; i <Okno.knihovna.velikost();i++){
-           jmeno = Okno.knihovna.getI(i).toStringall().toLowerCase();
+        for(int i = 0; i <Okno.getKnihovna().velikost();i++){
+           jmeno = Okno.getKnihovna().getI(i).toStringall().toLowerCase();
            if(jmeno.contains(s)){
-               kn.pridej(Okno.knihovna.getI(i));
+               kn.pridej(Okno.getKnihovna().getI(i));
            }
         }
         return kn;

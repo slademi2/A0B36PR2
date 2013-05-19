@@ -184,6 +184,5 @@ public class Kniha implements Serializable {
         }
         return true;
     }
-    
-    
+
 }

@@ -25,67 +25,65 @@ public class MujChoice extends Choice implements ItemListener {
     public void itemStateChanged(ItemEvent e) {
         int p = this.getSelectedIndex();
 
-        Okno.list.removeAll();
+        Okno.getList().removeAll();
 
         if (p == 0) {
-            for (int i = 0; i < Okno.pomocna.velikost(); i++) {
+            for (int i = 0; i < Okno.getPomocna().velikost(); i++) {
 
-                Okno.list.add((i + 1) + " - " + Okno.pomocna.toStringAutorDilo(i));
-                
+                Okno.getList().add((i + 1) + " - " + Okno.getPomocna().toStringAutorDilo(i));
+
 
             }
-            Okno.knihovna = Okno.pomocna;
-            System.out.println("dfdsfsddsh");
+            Okno.setKnihovna(Okno.getPomocna());
+
         }
         if (p == 1) {
-            Collections.sort(Okno.knihovna.getKnihovna(), new PodleJmena());
+            Collections.sort(Okno.getKnihovna().getKnihovna(), new PodleJmena());
 
-            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
+            for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
 
-                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+                Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
             }
 
         }
         if (p == 2) {
-            Collections.sort(Okno.knihovna.getKnihovna(), new PodlePrijmeni());
-            
-            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
+            Collections.sort(Okno.getKnihovna().getKnihovna(), new PodlePrijmeni());
 
-                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+            for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
+
+                Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
             }
         }
         if (p == 3) {
-            Collections.sort(Okno.knihovna.getKnihovna(), new PodleNazvu());
-            System.out.println(Okno.knihovna);
+            Collections.sort(Okno.getKnihovna().getKnihovna(), new PodleNazvu());
+            
+            for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
 
-            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
-
-                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+                Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
             }
         }
         if (p == 4) {
-            Collections.sort(Okno.knihovna.getKnihovna(), new PodleRoku());
-            System.out.println(Okno.knihovna);
-            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
+            Collections.sort(Okno.getKnihovna().getKnihovna(), new PodleRoku());
+            
+            for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
 
-                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+                Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
             }
         }
         if (p == 5) {
-            Collections.sort(Okno.knihovna.getKnihovna(), new PodleZanru());
-            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
+            Collections.sort(Okno.getKnihovna().getKnihovna(), new PodleZanru());
+            for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
 
-                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+                Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
             }
-            System.out.println(Okno.knihovna);
+        
         }
         if (p == 6) {
-            Collections.sort(Okno.knihovna.getKnihovna(), new PodleUmisteni());
-            for (int i = 0; i < Okno.knihovna.velikost(); i++) {
+            Collections.sort(Okno.getKnihovna().getKnihovna(), new PodleUmisteni());
+            for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
 
-                Okno.list.add((i + 1) + " - " + Okno.knihovna.toStringAutorDilo(i));
+                Okno.getList().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
             }
-            System.out.println(Okno.knihovna);
         }
     }
 }

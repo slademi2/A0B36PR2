@@ -47,7 +47,7 @@ public class Menulista extends JMenuBar {
     private class Ulozit implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            Okno.knihovna.save();
+            Okno.getKnihovna().save();
         }
     
     }
@@ -61,7 +61,7 @@ public class Menulista extends JMenuBar {
                 frame.dispose();
             }
             else{
-                Okno.knihovna.save();
+                Okno.getKnihovna().save();
                 System.exit(0);
                 
             }
