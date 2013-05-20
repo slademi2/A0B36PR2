@@ -1,8 +1,11 @@
 package semestralka;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Objects;
+
+/*
+ * Kniha , jeji instanci je polozka Knihovna - kniha
+ */
 
 public class Kniha implements Serializable {
    private String jmeno;
@@ -13,6 +16,9 @@ public class Kniha implements Serializable {
    private String zanr;
    private String rok;
     
+   /*
+    * konstruktory
+    */
     public Kniha(){
     
     }
@@ -34,6 +40,10 @@ public class Kniha implements Serializable {
         return jmeno+" "+prijmeni+" " + nazev +" "+ rok +" "+ zanr +" "+ umisteni;
     }
 
+    /*
+     * Gettery A Settery.
+     */
+    
     public String getJmeno() {
         return jmeno;
     }
@@ -90,6 +100,9 @@ public class Kniha implements Serializable {
         this.rok = rok;
     }
 
+   /*
+    * metody pro zjisteni parametru knihy, a pro nastaveni
+    */
     public void prectiJmeno(String p){
         this.setJmeno(p);
     }
@@ -113,7 +126,7 @@ public class Kniha implements Serializable {
     }
     public void prectiPoznamka (String p){
         if(p==null){
-            p = "Umístění nebylo zadáno.";
+            p = "Žádná poznámka";
             this.setPoznamka(p);
         }
         else{
@@ -124,6 +137,10 @@ public class Kniha implements Serializable {
         this.setRok(n);
     }
 
+    
+    /*
+     * metody hashCode a equals kvuli porovnavani
+     */
     @Override
     public int hashCode() {
         int hash = 7;

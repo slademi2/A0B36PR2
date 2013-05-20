@@ -10,21 +10,23 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.*;
 
+/*
+ * Zastupuje Menubar v hlavnim okne.
+ */
 public class Menulista extends JMenuBar {
     
+    /*
+     * konstruktor, vytvari moznosti v menu.
+     */
     public Menulista(){
         JMenu fileMenu = new JMenu("File");
         this.add(fileMenu);
-        
-        
-        
-        
+
         JMenuItem save = new JMenuItem("Save");
         save.addActionListener(new Ulozit());
         
         JMenuItem exit = new JMenuItem("Exit");
         exit.addActionListener(new Exit());
-        
         
         fileMenu.add(save);
         
@@ -46,6 +48,11 @@ public class Menulista extends JMenuBar {
         knihaMenu.add(smazat);
         knihaMenu.add(vyhledat);
     }
+    
+    /*
+     * actionlistenery
+     */
+    
     private class Ulozit implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {

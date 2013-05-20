@@ -3,70 +3,71 @@ package semestralka;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * trida obsluhujici hledani, actionlistener pro hledani.
+ */
+
 public class ObsluhaHledani implements ActionListener {
 
     private String hledat;
     private String com;
 
+    /*
+     * hledani, ktere vyuziva metod ve trida Knihovna
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         hledat = Panely.getText().getText();
         com = e.getActionCommand();
-
-
-        if ("Jména".equals(com)) {
-            Panely.setKn(Okno.getKnihovna().HledejJmeno(hledat));
-            Panely.getLi().removeAll();
-
-            for (int i = 0; i < Panely.getKn().velikost(); i++) {
-                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
-            }
-            Panely.setPocet(Panely.getKn().velikost());
-        }
-        else if ("Příjmení".equals(com)) {
-            Panely.setKn(Okno.getKnihovna().HledejPrijmeni(hledat));
-            Panely.getLi().removeAll();
-
-            for (int i = 0; i < Panely.getKn().velikost(); i++) {
-                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
-            }
-            Panely.setPocet(Panely.getKn().velikost());
-        }
-        else if ("Roku".equals(com)) {
-            Panely.setKn(Okno.getKnihovna().HledejRok(hledat));
-            Panely.getLi().removeAll();
-
-            for (int i = 0; i < Panely.getKn().velikost(); i++) {
-                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
-            }
-            Panely.setPocet(Panely.getKn().velikost());
-        }
-        else if ("Názvu".equals(com)) {
-            Panely.setKn(Okno.getKnihovna().HledejNazev(hledat));
-            Panely.getLi().removeAll();
-
-            for (int i = 0; i < Panely.getKn().velikost(); i++) {
-                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
-            }
-            Panely.setPocet(Panely.getKn().velikost());
-        }
-        else if ("Umístění".equals(com)) {
-            Panely.setKn(Okno.getKnihovna().HledejUmisteni(hledat));
-            Panely.getLi().removeAll();
-
-            for (int i = 0; i < Panely.getKn().velikost(); i++) {
-                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
-            }
-            Panely.setPocet(Panely.getKn().velikost());
-        }
-        else if ("Vše".equals(com)) {
-            Panely.setKn(Okno.getKnihovna().HledejVse(hledat));
-            Panely.getLi().removeAll();
-
-            for (int i = 0; i < Panely.getKn().velikost(); i++) {
-                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
-            }
-            Panely.setPocet(Panely.getKn().velikost());
+        switch (com) {
+            case "Jména":
+                Panely.setKn(Okno.getKnihovna().HledejJmeno(hledat));
+                Panely.getLi().removeAll();
+                for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
+                }
+                Panely.setPocet(Panely.getKn().velikost());
+                break;
+            case "Příjmení":
+                Panely.setKn(Okno.getKnihovna().HledejPrijmeni(hledat));
+                Panely.getLi().removeAll();
+                for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
+                }
+                Panely.setPocet(Panely.getKn().velikost());
+                break;
+            case "Roku":
+                Panely.setKn(Okno.getKnihovna().HledejRok(hledat));
+                Panely.getLi().removeAll();
+                for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
+                }
+                Panely.setPocet(Panely.getKn().velikost());
+                break;
+            case "Názvu":
+                Panely.setKn(Okno.getKnihovna().HledejNazev(hledat));
+                Panely.getLi().removeAll();
+                for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
+                }
+                Panely.setPocet(Panely.getKn().velikost());
+                break;
+            case "Umístění":
+                Panely.setKn(Okno.getKnihovna().HledejUmisteni(hledat));
+                Panely.getLi().removeAll();
+                for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
+                }
+                Panely.setPocet(Panely.getKn().velikost());
+                break;
+            case "Vše":
+                Panely.setKn(Okno.getKnihovna().HledejVse(hledat));
+                Panely.getLi().removeAll();
+                for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                    Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
+                }
+                Panely.setPocet(Panely.getKn().velikost());
+                break;
         }
     }
     /*public void actionPerformed(ActionEvent e) {
