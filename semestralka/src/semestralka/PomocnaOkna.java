@@ -1,25 +1,15 @@
 package semestralka;
 
-import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.List;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
-import semestralka.Okno.Hledat;
 
 public class PomocnaOkna extends JFrame {
 
@@ -47,6 +37,9 @@ public class PomocnaOkna extends JFrame {
     String metoda;
     private String pred, ted;
 
+    /*
+     * konstruktory PomocnaOkna();
+     */
     public PomocnaOkna() {
         this.setVisible(true);
         this.setBounds(320, 200, 300, 500);
@@ -54,29 +47,14 @@ public class PomocnaOkna extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    
     public PomocnaOkna(int index, String metoda) {
         this.index = index;
         this.metoda = metoda;
         this.setBounds(320, 200, 300, 500);
         this.setVisible(true);
     }
-
-    public String getPred() {
-        return pred;
-    }
-
-    public void setPred(String pred) {
-        this.pred = pred;
-    }
-
-    public String getTed() {
-        return ted;
-    }
-
-    public void setTed(String ted) {
-        this.ted = ted;
-    }
-
+    
     void upravit() {
         GridLayout gl = new GridLayout(8, 2, 5, 20);
         this.setResizable(false);
@@ -144,7 +122,12 @@ public class PomocnaOkna extends JFrame {
         this.pack();
 
     }
-
+    /*
+     * metoda upravit, modifikuje PomocnaOkna .
+     * vznika okno pro upravu knih.
+     * je rozlišeno z jakeho panelu se vola.
+     */
+    
     void novy() {
         this.setTitle("Nová Kniha");
         GridLayout gl = new GridLayout(8, 2, 5, 20);
@@ -188,7 +171,10 @@ public class PomocnaOkna extends JFrame {
         getZrusit().addActionListener(new Zrusit());
 
         this.pack();
-    }
+    } 
+    /*
+     * metoda novy, modifikuje PomocnaOkna pro vytvoreni nove knihy.
+     */
 
     private class Hotovo_hledat implements ActionListener {
 
@@ -259,6 +245,12 @@ public class PomocnaOkna extends JFrame {
             dispose();
         }
     }
+    /*
+     * ActionListener pro tlacitko Hotovo - metoda upravit.
+     * rozlisuje 2 moznosti - pokud je vyhledavani stejne jako cela knihovna
+     *  - obsahuje stejny pocet knih.
+     *  - vyhledavani je mensi
+     */
 
     private class Vytvorit implements ActionListener {
 
@@ -286,6 +278,11 @@ public class PomocnaOkna extends JFrame {
             dispose();
         }
     }
+    
+    /*
+     * actionlistener tlacitka vytvorit.
+     *
+     */
 
     private class Zrusit implements ActionListener {
 
@@ -294,7 +291,7 @@ public class PomocnaOkna extends JFrame {
             dispose();
         }
     }
-
+    /*ruseni, zavira okno*/
     private class ListAction implements ActionListener {
 
         @Override
@@ -366,6 +363,10 @@ public class PomocnaOkna extends JFrame {
             }
         }
     }
+    
+    /*
+     * listaction pro List- rozkliknuti polozky v listu (knihy)
+     */
 
     private class ItemAction implements ItemListener {
 
@@ -373,16 +374,17 @@ public class PomocnaOkna extends JFrame {
         public void itemStateChanged(ItemEvent e) {
 
             String s = (e.getItem().toString());
-            System.out.println("Vybrána kniha číslo: " + s);
+          
             setN(Integer.parseInt(s));
         }
     }
-
-    private String getDateTime() {
-        DateFormat dfFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
-        Date dNow = new Date();
-        return dfFormat.format(dNow);
-    }
+    /*
+     * vybrana kniha
+     */
+    
+    /*
+     * Gettery a settery
+     */
 
     public static int getN() {
         return n;
@@ -558,5 +560,25 @@ public class PomocnaOkna extends JFrame {
 
     public void setMetoda(String metoda) {
         this.metoda = metoda;
+    }
+     public String getPred() {
+        return pred;
+    }
+
+    public void setPred(String pred) {
+        this.pred = pred;
+    }
+
+    public String getTed() {
+        return ted;
+    }
+
+    public void setTed(String ted) {
+        this.ted = ted;
+    }
+    private String getDateTime() {
+        DateFormat dfFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+        Date dNow = new Date();
+        return dfFormat.format(dNow);
     }
 }

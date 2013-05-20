@@ -8,12 +8,14 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
+
+/*
+ *  Tato třída je potomken JPanel
+ *  instanci teto tridy jsou Panely (celkem jsou vytvoreny 3)
+ */
 public class Panely extends JPanel {
 
     private String pred;
@@ -29,7 +31,6 @@ public class Panely extends JPanel {
     private boolean oznaceno_List = false;
     private int predchozi;
     private static JFrame f = new JFrame("Kniha");
-    
 
     public Panely() {
         this.setSize(vyska, sirka);
@@ -37,7 +38,7 @@ public class Panely extends JPanel {
         this.setLayout(null);
     }
 
-    void odebrat() { // panel zobrazit, spatne pojmenovani
+    void odebrat() {
 
         setVyska(455);
         setSirka(340);
@@ -90,6 +91,10 @@ public class Panely extends JPanel {
 
 
     }
+    /*
+     * zobrazit, spatne pojmenovani.
+     * obsahuje volani razeni, ktere je uskutecnovano ve tride MujChoice.java
+     */
 
     void hledat() {
         Panely.getLi().removeAll();
@@ -101,9 +106,6 @@ public class Panely extends JPanel {
         for (int i = 0; i < Okno.getKnihovna().velikost(); i++) {
             Panely.getLi().add((i + 1) + " - " + Okno.getKnihovna().toStringAutorDilo(i));
         }
-
-
-
         Panely.getLi().setBounds(2, 2, 440, 180);
 
         Panely.getLi().addActionListener(new ListAction_Hledat());
@@ -182,6 +184,9 @@ public class Panely extends JPanel {
         this.add(mep);
         this.add(upravit);
     }
+    /*
+     * vola hledani, ktere je uskutecnovano pomoci tridy ObsluhaHledani,java
+     */
 
     private static class Upravit_Hledat implements ActionListener {
 
@@ -198,6 +203,9 @@ public class Panely extends JPanel {
             getF().dispose();
         }
     }
+    /*
+     * actionlistener tlacitka upravit pro pannel Hledani
+     */
 
     private static class Upravit_Zobrazit implements ActionListener {
 
@@ -206,7 +214,7 @@ public class Panely extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("UPRAVIT");
+
             PomocnaOkna p = new PomocnaOkna(getN(), "Zobrazit");
             p.upravit();
             p.setVisible(true);
@@ -214,12 +222,15 @@ public class Panely extends JPanel {
 
         }
     }
+    /*
+     * actipnlistener tlacitka upravit pro panel zobrazit
+     */
 
     private class ListAction implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+
             Kniha kl = new Kniha();
             getF().setResizable(false);
             JFrame oki = new JFrame();
@@ -274,6 +285,9 @@ public class Panely extends JPanel {
             Okno.getPanelhledat().setVisible(false);
         }
     }
+    /*
+     * actionlistener zpet pro panel zobrazeni
+     */
 
     public class Zpet_Hledat implements ActionListener { // zpet pro panel hledani
 
@@ -290,6 +304,9 @@ public class Panely extends JPanel {
 
         }
     }
+    /*
+     * zpet pro panel hledani
+     */
 
     public class Smazat implements ActionListener { //(smazat v normálním prohlizeni)
 
@@ -308,6 +325,9 @@ public class Panely extends JPanel {
             }
         }
     }
+    /*
+     * smazat, v panelu prohlizeni
+     */
 
     public class Smazat_Hledat implements ActionListener { // smazat v hledani (panel hledatú)
 
@@ -374,6 +394,9 @@ public class Panely extends JPanel {
 
         }
     }
+    /*
+     * zmazat v panelu hledani
+     */
 
     private class ListAction_Hledat implements ActionListener {
 
@@ -388,7 +411,7 @@ public class Panely extends JPanel {
             if (!getSoucastne().equals(getPred())) {
 
                 if (Panely.getPocet() == Okno.getKnihovna().velikost()) {
-                    
+
 
                     kp = Okno.getKnihovna().getI(getN());
 
@@ -419,7 +442,7 @@ public class Panely extends JPanel {
                     //
                     setPred(getDateTime());
                 } else {
-                    
+
 
                     kp = Panely.getKn().getI(getN());
 
@@ -465,12 +488,13 @@ public class Panely extends JPanel {
 
         }
     }
-
-    private String getDateTime() {
-        DateFormat dfFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
-        Date dNow = new Date();
-        return dfFormat.format(dNow);
-    }
+    
+    
+    /*
+     * Gettery a Settery
+     * 
+     */
+    
 
     public static int getPocet() {
         return pocet;
@@ -494,6 +518,12 @@ public class Panely extends JPanel {
 
     public static void setText(JTextField text) {
         Panely.text = text;
+    }
+
+    private String getDateTime() {
+        DateFormat dfFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
+        Date dNow = new Date();
+        return dfFormat.format(dNow);
     }
 
     public static int getN() {

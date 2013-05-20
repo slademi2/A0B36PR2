@@ -101,7 +101,11 @@ public class Okno extends JFrame {
 
 
     }
+    
     /*Konstruktor, obsahuje všechna
+     * hlavni okno programu, obsahuje 3 hlavni panely.
+     * obsahuje hlavnimenu
+     * vytvoreni Menu listy
      * tlačítka hlavního okna programu*/
 
     static class Novy implements ActionListener {
@@ -127,6 +131,9 @@ public class Okno extends JFrame {
 
         }
     }
+    /*
+     * actionlistener tlacitka odebrat(tlacitko zobrazeni knihovny
+     */
 
     static class Hledat implements ActionListener {
 
@@ -136,13 +143,12 @@ public class Okno extends JFrame {
             getPanelodebrat().setVisible(false);
             getPanelhledat().setVisible(true);
             getPanelhledat().hledat();
-           int p = Okno.getPocet();
-           p++;
-            Okno.setPocet(p);
-            System.out.println("pocet stisknuti vyhledavani je: " + Okno.getPocet());
-
+           
         }
     }
+    /*
+     * actionListener tlacitka hledat. Zviditelnuje Panel pro hledani knih
+     */
 
     private static class Konec implements ActionListener {
 
@@ -161,7 +167,7 @@ public class Okno extends JFrame {
         }
     }
     /*
-     Metoda konec / ukončuje program, ukládá knihovnu
+     *Metoda konec - actionlistener tlacitka"ukoncit" / ukončuje program, ukládá knihovnu
      */
 
     public class Zpet implements ActionListener {
@@ -173,8 +179,12 @@ public class Okno extends JFrame {
             getPanelhledat().setVisible(false);
 
         }
-    }
+    }/*
+     *Zpet - ActionListener pro tlacitko zpet. , zviditelnuje hlavnipanel
+     */
 
+    
+    
     private class Ulozit implements ActionListener {
 
         @Override
@@ -183,9 +193,14 @@ public class Okno extends JFrame {
         }
     }
     /*
-     ActionListener tlacitka ulozit, uklada knihovnu
+     *ActionListener tlacitka ulozit, uklada knihovnu
      */
     
+    
+    
+    /*
+     * gettery a settery
+     */
     public static Knihovna getKnihovna() {
         return knihovna;
     }
