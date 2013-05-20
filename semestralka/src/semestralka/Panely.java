@@ -29,6 +29,7 @@ public class Panely extends JPanel {
     private boolean oznaceno_List = false;
     private int predchozi;
     private static JFrame f = new JFrame("Kniha");
+    
 
     public Panely() {
         this.setSize(vyska, sirka);
@@ -218,16 +219,19 @@ public class Panely extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            
             Kniha kl = new Kniha();
-
+            getF().setResizable(false);
+            JFrame oki = new JFrame();
+            oki.setResizable(false);
             int i = (int) (e.getActionCommand().charAt(0));
 
             kl = Okno.getKnihovna().getI(i - 49);
 
             GridLayout gl = new GridLayout(6, 1, 10, 20);
-            getF().setLayout(gl);
-            getF().setVisible(true);
-            getF().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            oki.setLayout(gl);
+            oki.setVisible(true);
+            oki.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
             JLabel jmeno = new JLabel("Autor:   " + kl.getJmeno() + " " + kl.getPrijmeni());
             JLabel titul = new JLabel("Titul:   " + kl.getNazev());
@@ -239,14 +243,14 @@ public class Panely extends JPanel {
             upravit.setSize(100, 30);
             upravit.addActionListener(new Upravit_Zobrazit());
 
-            getF().add(jmeno);
-            getF().add(titul);
-            getF().add(rok);
-            getF().add(poznamka);
-            getF().add(umisteni);
-            getF().add(upravit);
+            oki.add(jmeno);
+            oki.add(titul);
+            oki.add(rok);
+            oki.add(poznamka);
+            oki.add(umisteni);
+            oki.add(upravit);
 
-            getF().setBounds(320, 200, 300, 350);
+            oki.setBounds(320, 200, 300, 350);
         }
     }
 
@@ -376,76 +380,80 @@ public class Panely extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             Kniha kp;
-
-            JFrame k = new JFrame();
-
+            getF().setResizable(false);
+            //JFrame k = new JFrame();
+            JFrame ok = new JFrame();
+            ok.setResizable(false);
             setSoucastne(getDateTime());
-            //  if (!getSoucastne().equals(getPred())) {
+            if (!getSoucastne().equals(getPred())) {
 
-            if (Panely.getPocet() == Okno.getKnihovna().velikost()) {
+                if (Panely.getPocet() == Okno.getKnihovna().velikost()) {
+                    
 
-                kp = Okno.getKnihovna().getI(getN());
+                    kp = Okno.getKnihovna().getI(getN());
 
-                GridLayout gl = new GridLayout(6, 1, 10, 20);
+                    GridLayout gl = new GridLayout(6, 1, 10, 20);
 
-                k.setLayout(gl);
-                k.setVisible(true);
-                k.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    ok.setLayout(gl);
+                    ok.setVisible(true);
+                    ok.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
-                JLabel titul = new JLabel("Titul:   " + kp.getNazev());
-                JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
-                JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
-                JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
+                    JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
+                    JLabel titul = new JLabel("Titul:   " + kp.getNazev());
+                    JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
+                    JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
+                    JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-                k.add(jmeno);
-                k.add(titul);
-                k.add(rok);
-                k.add(poznamka);
-                k.add(umisteni);
+                    ok.add(jmeno);
+                    ok.add(titul);
+                    ok.add(rok);
+                    ok.add(poznamka);
+                    ok.add(umisteni);
 
-                Tlacitko upravit = new Tlacitko("Upravit");
-                upravit.addActionListener(new Upravit_Hledat());
-                k.add(upravit);
-                k.setBounds(320, 200, 300, 350);
-
-
-                setF(k);
-                setPred(getDateTime());
-            } else {
+                    Tlacitko upravit = new Tlacitko("Upravit");
+                    upravit.addActionListener(new Upravit_Hledat());
+                    ok.add(upravit);
+                    ok.setBounds(320, 200, 300, 350);
 
 
-                kp = Panely.getKn().getI(getN());
+                    //
+                    setPred(getDateTime());
+                } else {
+                    
 
-                GridLayout gl = new GridLayout(6, 1, 10, 20);
-                k.setLayout(gl);
-                k.setVisible(true);
-                k.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    kp = Panely.getKn().getI(getN());
 
-                JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
-                JLabel titul = new JLabel("Titul:   " + kp.getNazev());
-                JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
-                JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
-                JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
+                    GridLayout gl = new GridLayout(6, 1, 10, 20);
+                    ok.setLayout(gl);
+                    ok.setVisible(true);
+                    ok.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                k.add(jmeno);
-                k.add(titul);
-                k.add(rok);
-                k.add(poznamka);
-                k.add(umisteni);
+                    JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
+                    JLabel titul = new JLabel("Titul:   " + kp.getNazev());
+                    JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
+                    JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
+                    JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-                Tlacitko upravit = new Tlacitko("Upravit");
-                upravit.addActionListener(new Upravit_Hledat());
-                k.add(upravit);
-                k.setBounds(320, 200, 300, 350);
+                    ok.add(jmeno);
+                    ok.add(titul);
+                    ok.add(rok);
+                    ok.add(poznamka);
+                    ok.add(umisteni);
 
-                setPred(getDateTime());
-                setF(k);
-                // }
+                    Tlacitko upravit = new Tlacitko("Upravit");
+                    upravit.addActionListener(new Upravit_Hledat());
+                    ok.add(upravit);
+                    ok.setBounds(320, 200, 300, 350);
+
+                    setPred(getDateTime());
+                    // setF(k);
+                    // }
+                }
+                setF(ok);
+
             }
 
         }
-        // }
     }
 
     private class ItemAction_Hledat implements ItemListener {
