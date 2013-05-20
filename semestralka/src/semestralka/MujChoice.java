@@ -4,8 +4,6 @@ import java.awt.Choice;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Collections;
-import javax.swing.*;
-
 /*
  * trida ktera obsluhuje razeni knih, jejim itemlistenerem je ona sama
  */
