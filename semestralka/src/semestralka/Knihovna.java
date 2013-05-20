@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 public class Knihovna implements Serializable {
 
     private ArrayList<Kniha> knihovna = new ArrayList<Kniha>();
-    private String pole[];
+    //private String pole[];
 
     public ArrayList<Kniha> getKnihovna() {
         return knihovna;

@@ -10,63 +10,63 @@ public class ObsluhaHledani implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        hledat = Panely.text.getText();
+        hledat = Panely.getText().getText();
         com = e.getActionCommand();
 
 
         if ("Jména".equals(com)) {
-            Panely.kn = Okno.knihovna.HledejJmeno(hledat);
-            Panely.li.removeAll();
+            Panely.setKn(Okno.getKnihovna().HledejJmeno(hledat));
+            Panely.getLi().removeAll();
 
-            for (int i = 0; i < Panely.kn.velikost(); i++) {
-                Panely.li.add((i + 1) + " - " + Panely.kn.toStringAutorDilo(i));
+            for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
             }
-            Panely.pocet = Panely.kn.velikost();
+            Panely.setPocet(Panely.getKn().velikost());
         }
-        if ("Příjmení".equals(com)) {
-            Panely.kn = Okno.knihovna.HledejPrijmeni(hledat);
-            Panely.li.removeAll();
+        else if ("Příjmení".equals(com)) {
+            Panely.setKn(Okno.getKnihovna().HledejPrijmeni(hledat));
+            Panely.getLi().removeAll();
 
-            for (int i = 0; i < Panely.kn.velikost(); i++) {
-                Panely.li.add((i + 1) + " - " + Panely.kn.toStringAutorDilo(i));
+            for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
             }
-            Panely.pocet = Panely.kn.velikost();
+            Panely.setPocet(Panely.getKn().velikost());
         }
-        if ("Roku".equals(com)) {
-            Panely.kn = Okno.knihovna.HledejRok(hledat);
-            Panely.li.removeAll();
+        else if ("Roku".equals(com)) {
+            Panely.setKn(Okno.getKnihovna().HledejRok(hledat));
+            Panely.getLi().removeAll();
 
-            for (int i = 0; i < Panely.kn.velikost(); i++) {
-                Panely.li.add((i + 1) + " - " + Panely.kn.toStringAutorDilo(i));
+            for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
             }
-           Panely.pocet = Panely.kn.velikost();
+            Panely.setPocet(Panely.getKn().velikost());
         }
-        if ("Názvu".equals(com)) {
-            Panely.kn = Okno.knihovna.HledejNazev(hledat);
-            Panely.li.removeAll();
+        else if ("Názvu".equals(com)) {
+            Panely.setKn(Okno.getKnihovna().HledejNazev(hledat));
+            Panely.getLi().removeAll();
 
-            for (int i = 0; i < Panely.kn.velikost(); i++) {
-                Panely.li.add((i + 1) + " - " + Panely.kn.toStringAutorDilo(i));
+            for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
             }
-            Panely.pocet = Panely.kn.velikost();
+            Panely.setPocet(Panely.getKn().velikost());
         }
-        if ("Umístění".equals(com)) {
-            Panely.kn = Okno.knihovna.HledejUmisteni(hledat);
-            Panely.li.removeAll();
+        else if ("Umístění".equals(com)) {
+            Panely.setKn(Okno.getKnihovna().HledejUmisteni(hledat));
+            Panely.getLi().removeAll();
 
-            for (int i = 0; i < Panely.kn.velikost(); i++) {
-                Panely.li.add((i + 1) + " - " + Panely.kn.toStringAutorDilo(i));
+            for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
             }
-            Panely.pocet = Panely.kn.velikost();
+            Panely.setPocet(Panely.getKn().velikost());
         }
-        if ("Vše".equals(com)) {
-            Panely.kn = Okno.knihovna.HledejVse(hledat);
-            Panely.li.removeAll();
+        else if ("Vše".equals(com)) {
+            Panely.setKn(Okno.getKnihovna().HledejVse(hledat));
+            Panely.getLi().removeAll();
 
-            for (int i = 0; i < Panely.kn.velikost(); i++) {
-                Panely.li.add((i + 1) + " - " + Panely.kn.toStringAutorDilo(i));
+            for (int i = 0; i < Panely.getKn().velikost(); i++) {
+                Panely.getLi().add((i + 1) + " - " + Panely.getKn().toStringAutorDilo(i));
             }
-            Panely.pocet = Panely.kn.velikost();
+            Panely.setPocet(Panely.getKn().velikost());
         }
     }
     /*public void actionPerformed(ActionEvent e) {

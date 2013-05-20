@@ -20,80 +20,15 @@ import javax.swing.*;
 
 public class Okno extends JFrame {
 
-    static Knihovna knihovna = new Knihovna();
-    static Knihovna pomocna = new Knihovna();
-    public static Panely hlavnipanel = new Panely();
-    public static Panely panelodebrat = new Panely();
-    public static Panely panelhledat = new Panely();
-    static List list = new List(knihovna.velikost());
-    static List zobrlist = new List(knihovna.velikost());
+    private static Knihovna knihovna = new Knihovna();
+    private static Knihovna pomocna = new Knihovna();
+    private static Panely hlavnipanel = new Panely();
+    private static Panely panelodebrat = new Panely();
+    private static Panely panelhledat = new Panely();
+    private static List list = new List(getKnihovna().velikost());
+    private static List zobrlist = new List(getKnihovna().velikost());
     private static int pocet;
 
-    public static Knihovna getKnihovna() {
-        return knihovna;
-    }
-
-    public static void setKnihovna(Knihovna knihovna) {
-        Okno.knihovna = knihovna;
-    }
-
-    public static Knihovna getPomocna() {
-        return pomocna;
-    }
-
-    public static void setPomocna(Knihovna pomocna) {
-        Okno.pomocna = pomocna;
-    }
-
-    public static Panely getHlavnipanel() {
-        return hlavnipanel;
-    }
-
-    public static void setHlavnipanel(Panely hlavnipanel) {
-        Okno.hlavnipanel = hlavnipanel;
-    }
-
-    public static Panely getPanelodebrat() {
-        return panelodebrat;
-    }
-
-    public static void setPanelodebrat(Panely panelodebrat) {
-        Okno.panelodebrat = panelodebrat;
-    }
-
-    public static Panely getPanelhledat() {
-        return panelhledat;
-    }
-
-    public static void setPanelhledat(Panely panelhledat) {
-        Okno.panelhledat = panelhledat;
-    }
-
-    public static List getList() {
-        return list;
-    }
-
-    public static void setList(List list) {
-        Okno.list = list;
-    }
-
-    public static List getZobrlist() {
-        return zobrlist;
-    }
-
-    public static void setZobrlist(List zobrlist) {
-        Okno.zobrlist = zobrlist;
-    }
-
-    public static int getPocet() {
-        return pocet;
-    }
-
-    public static void setPocet(int pocet) {
-        Okno.pocet = pocet;
-    }
-       
-    
     
     public Okno() throws HeadlessException {
 
@@ -250,4 +185,69 @@ public class Okno extends JFrame {
     /*
      ActionListener tlacitka ulozit, uklada knihovnu
      */
+    
+    public static Knihovna getKnihovna() {
+        return knihovna;
+    }
+
+    public static void setKnihovna(Knihovna knihovna) {
+        Okno.knihovna = knihovna;
+    }
+
+    public static Knihovna getPomocna() {
+        return pomocna;
+    }
+
+    public static void setPomocna(Knihovna pomocna) {
+        Okno.pomocna = pomocna;
+    }
+
+    public static Panely getHlavnipanel() {
+        return hlavnipanel;
+    }
+
+    public static void setHlavnipanel(Panely hlavnipanel) {
+        Okno.hlavnipanel = hlavnipanel;
+    }
+
+    public static Panely getPanelodebrat() {
+        return panelodebrat;
+    }
+
+    public static void setPanelodebrat(Panely panelodebrat) {
+        Okno.panelodebrat = panelodebrat;
+    }
+
+    public static Panely getPanelhledat() {
+        return panelhledat;
+    }
+
+    public static void setPanelhledat(Panely panelhledat) {
+        Okno.panelhledat = panelhledat;
+    }
+
+    public static List getList() {
+        return list;
+    }
+
+    public static void setList(List list) {
+        Okno.list = list;
+    }
+
+    public static List getZobrlist() {
+        return zobrlist;
+    }
+
+    public static void setZobrlist(List zobrlist) {
+        Okno.zobrlist = zobrlist;
+    }
+
+    public static int getPocet() {
+        return pocet;
+    }
+
+    public static void setPocet(int pocet) {
+        Okno.pocet = pocet;
+    }
+
 }

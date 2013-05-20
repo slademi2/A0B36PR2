@@ -18,121 +18,17 @@ public class Panely extends JPanel {
 
     private String pred;
     private String soucastne;
-    static public int pocet;
-    static Knihovna kn = new Knihovna();
-    static JTextField text = new JTextField();
-    static int n;
-    static List li = new List(Okno.knihovna.velikost());
-    public int vyska = 450;
-    public int sirka = 280;
-    boolean oznaceno = false;
-    boolean oznaceno_List = false;
-    int predchozi;
-    static JFrame f = new JFrame("Kniha");
-
-    public static int getPocet() {
-        return pocet;
-    }
-
-    public static void setPocet(int pocet) {
-        Panely.pocet = pocet;
-    }
-
-    public static Knihovna getKn() {
-        return kn;
-    }
-
-    public static void setKn(Knihovna kn) {
-        Panely.kn = kn;
-    }
-
-    public static JTextField getText() {
-        return text;
-    }
-
-    public static void setText(JTextField text) {
-        Panely.text = text;
-    }
-
-    public static int getN() {
-        return n;
-    }
-
-    public static void setN(int n) {
-        Panely.n = n;
-    }
-
-    public static List getLi() {
-        return li;
-    }
-
-    public static void setLi(List li) {
-        Panely.li = li;
-    }
-
-    public int getVyska() {
-        return vyska;
-    }
-
-    public void setVyska(int vyska) {
-        this.vyska = vyska;
-    }
-
-    public int getSirka() {
-        return sirka;
-    }
-
-    public void setSirka(int sirka) {
-        this.sirka = sirka;
-    }
-
-    public boolean isOznaceno() {
-        return oznaceno;
-    }
-
-    public void setOznaceno(boolean oznaceno) {
-        this.oznaceno = oznaceno;
-    }
-
-    public boolean isOznaceno_List() {
-        return oznaceno_List;
-    }
-
-    public void setOznaceno_List(boolean oznaceno_List) {
-        this.oznaceno_List = oznaceno_List;
-    }
-
-    public int getPredchozi() {
-        return predchozi;
-    }
-
-    public void setPredchozi(int predchozi) {
-        this.predchozi = predchozi;
-    }
-
-    public static JFrame getF() {
-        return f;
-    }
-
-    public static void setF(JFrame f) {
-        Panely.f = f;
-    }
-
-    public String getPred() {
-        return pred;
-    }
-
-    public void setPred(String pred) {
-        this.pred = pred;
-    }
-
-    public String getSoucastne() {
-        return soucastne;
-    }
-
-    public void setSoucastne(String soucastne) {
-        this.soucastne = soucastne;
-    }
+    static private int pocet;
+    private static Knihovna kn = new Knihovna();
+    private static JTextField text = new JTextField();
+    private static int n;
+    private static List li = new List(Okno.getKnihovna().velikost());
+    private int vyska = 450;
+    private int sirka = 280;
+    private boolean oznaceno = false;
+    private boolean oznaceno_List = false;
+    private int predchozi;
+    private static JFrame f = new JFrame("Kniha");
 
     public Panely() {
         this.setSize(vyska, sirka);
@@ -484,68 +380,68 @@ public class Panely extends JPanel {
             JFrame k = new JFrame();
 
             setSoucastne(getDateTime());
-            if (!getSoucastne().equals(getPred())) {
+            //  if (!getSoucastne().equals(getPred())) {
 
-                if (Panely.getPocet() == Okno.getKnihovna().velikost()) {
+            if (Panely.getPocet() == Okno.getKnihovna().velikost()) {
 
-                    kp = Okno.getKnihovna().getI(getN());
+                kp = Okno.getKnihovna().getI(getN());
 
-                    GridLayout gl = new GridLayout(6, 1, 10, 20);
+                GridLayout gl = new GridLayout(6, 1, 10, 20);
 
-                    k.setLayout(gl);
-                    k.setVisible(true);
-                    k.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                k.setLayout(gl);
+                k.setVisible(true);
+                k.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                    JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
-                    JLabel titul = new JLabel("Titul:   " + kp.getNazev());
-                    JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
-                    JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
-                    JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
+                JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
+                JLabel titul = new JLabel("Titul:   " + kp.getNazev());
+                JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
+                JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
+                JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-                    k.add(jmeno);
-                    k.add(titul);
-                    k.add(rok);
-                    k.add(poznamka);
-                    k.add(umisteni);
+                k.add(jmeno);
+                k.add(titul);
+                k.add(rok);
+                k.add(poznamka);
+                k.add(umisteni);
 
-                    Tlacitko upravit = new Tlacitko("Upravit");
-                    upravit.addActionListener(new Upravit_Hledat());
-                    k.add(upravit);
-                    k.setBounds(320, 200, 300, 350);
-
-
-                    setF(k);
-                    setPred(getDateTime());
-                } else {
+                Tlacitko upravit = new Tlacitko("Upravit");
+                upravit.addActionListener(new Upravit_Hledat());
+                k.add(upravit);
+                k.setBounds(320, 200, 300, 350);
 
 
-                    kp = Panely.getKn().getI(getN());
+                setF(k);
+                setPred(getDateTime());
+            } else {
 
-                    GridLayout gl = new GridLayout(6, 1, 10, 20);
-                    k.setLayout(gl);
-                    k.setVisible(true);
-                    k.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                    JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
-                    JLabel titul = new JLabel("Titul:   " + kp.getNazev());
-                    JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
-                    JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
-                    JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
+                kp = Panely.getKn().getI(getN());
 
-                    k.add(jmeno);
-                    k.add(titul);
-                    k.add(rok);
-                    k.add(poznamka);
-                    k.add(umisteni);
+                GridLayout gl = new GridLayout(6, 1, 10, 20);
+                k.setLayout(gl);
+                k.setVisible(true);
+                k.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                    Tlacitko upravit = new Tlacitko("Upravit");
-                    upravit.addActionListener(new Upravit_Hledat());
-                    k.add(upravit);
-                    k.setBounds(320, 200, 300, 350);
+                JLabel jmeno = new JLabel("Autor:   " + kp.getJmeno() + " " + kp.getPrijmeni());
+                JLabel titul = new JLabel("Titul:   " + kp.getNazev());
+                JLabel rok = new JLabel("Rok vydání:   " + kp.getRok());
+                JLabel poznamka = new JLabel("Poznámky:   " + kp.getPoznamka());
+                JLabel umisteni = new JLabel("Umístění:   " + kp.getUmisteni());
 
-                    setPred(getDateTime());
-                    setF(k);
-                }
+                k.add(jmeno);
+                k.add(titul);
+                k.add(rok);
+                k.add(poznamka);
+                k.add(umisteni);
+
+                Tlacitko upravit = new Tlacitko("Upravit");
+                upravit.addActionListener(new Upravit_Hledat());
+                k.add(upravit);
+                k.setBounds(320, 200, 300, 350);
+
+                setPred(getDateTime());
+                setF(k);
+                // }
             }
 
         }
@@ -566,5 +462,109 @@ public class Panely extends JPanel {
         DateFormat dfFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
         Date dNow = new Date();
         return dfFormat.format(dNow);
+    }
+
+    public static int getPocet() {
+        return pocet;
+    }
+
+    public static void setPocet(int pocet) {
+        Panely.pocet = pocet;
+    }
+
+    public static Knihovna getKn() {
+        return kn;
+    }
+
+    public static void setKn(Knihovna kn) {
+        Panely.kn = kn;
+    }
+
+    public static JTextField getText() {
+        return text;
+    }
+
+    public static void setText(JTextField text) {
+        Panely.text = text;
+    }
+
+    public static int getN() {
+        return n;
+    }
+
+    public static void setN(int n) {
+        Panely.n = n;
+    }
+
+    public static List getLi() {
+        return li;
+    }
+
+    public static void setLi(List li) {
+        Panely.li = li;
+    }
+
+    public int getVyska() {
+        return vyska;
+    }
+
+    public void setVyska(int vyska) {
+        this.vyska = vyska;
+    }
+
+    public int getSirka() {
+        return sirka;
+    }
+
+    public void setSirka(int sirka) {
+        this.sirka = sirka;
+    }
+
+    public boolean isOznaceno() {
+        return oznaceno;
+    }
+
+    public void setOznaceno(boolean oznaceno) {
+        this.oznaceno = oznaceno;
+    }
+
+    public boolean isOznaceno_List() {
+        return oznaceno_List;
+    }
+
+    public void setOznaceno_List(boolean oznaceno_List) {
+        this.oznaceno_List = oznaceno_List;
+    }
+
+    public int getPredchozi() {
+        return predchozi;
+    }
+
+    public void setPredchozi(int predchozi) {
+        this.predchozi = predchozi;
+    }
+
+    public static JFrame getF() {
+        return f;
+    }
+
+    public static void setF(JFrame f) {
+        Panely.f = f;
+    }
+
+    public String getPred() {
+        return pred;
+    }
+
+    public void setPred(String pred) {
+        this.pred = pred;
+    }
+
+    public String getSoucastne() {
+        return soucastne;
+    }
+
+    public void setSoucastne(String soucastne) {
+        this.soucastne = soucastne;
     }
 }

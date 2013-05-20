@@ -120,22 +120,7 @@ public class Kniha implements Serializable {
             this.setPoznamka(p);
         }
     }
-    public void prectiRok(String n){// throws InvalidYearNumberException{
-        
-      /*  int year = Calendar.getInstance().get(Calendar.YEAR);
-        int c=0;
-        
-        if(n.length()>4){
-            //throw new InvalidYearNumberException(n);
-        }
-        
-        try {
-            c = Integer.parseInt(n);
-            
-        } catch (NumberFormatException ex) {
-            //throw new InvalidYearNumberException(n);
-        }
-        this.setRok(c);*/
+    public void prectiRok(String n){
         this.setRok(n);
     }
 
